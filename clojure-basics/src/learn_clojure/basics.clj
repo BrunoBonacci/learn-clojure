@@ -75,10 +75,12 @@
 ;;
 ;; ### Booleans<a name="here">&nbsp;</a>
 ;;
-;; In Clojure we have boolean values like in many other languages.
-;; No surprise here we have two values `true` and `false` which just
-;; evaluate to themselves, and if we check the type of these values
-;; we'll find that they are just simple Java `java.lang.Boolean` objects.
+;; In Clojure we have boolean values like in many other languages.  No
+;; surprise here we have two values `true` and `false` which just
+;; evaluate to themselves.  Now we can use the function `type` to see
+;; what is the concrete type of these values in the host platform, and
+;; if we check the type of these values we'll find that they are just
+;; simple Java `java.lang.Boolean` objects.
 ;;
 
 true
@@ -89,6 +91,37 @@ false
 
 (type true)
 ;;=> java.lang.Boolean
+
+;;
+;; Now boolean values are often associated to **logic programming** and
+;; the concept of **"truthiness"**. In strongly typed languages such as Java
+;; you can only use boolean in conditional operation.
+;; Some other languages such C/C++ have a more lose definition **"truthiness"**.
+;; __In Clojure everything is considered **true** with the exception of `false`
+;; and `nil`.__
+;;
+;; For example we can use the following form `(if condition truthy falsey)`
+;; which evaluates the given `condition` and if the condition has a logical
+;; value of true then it will evaluate `truthy` form otherwise it evaluates
+;; the `falsey`.
+;;
+
+(if true "it's true" "it's false")
+;;=> "it's true"
+
+(if false "it's true" "it's false")
+;;=> "it's false"
+
+(if nil "it's true" "it's false")
+;;=> "it's false"
+
+(if "HELLO" "it's true" "it's false")
+;;=> "it's true"
+
+(if 1 "it's true" "it's false")
+;;=> "it's true"
+
+
 
 
 
