@@ -121,8 +121,64 @@ false
 (if 1 "it's true" "it's false")
 ;;=> "it's true"
 
+;;
+;; ### Numbers
+;;
+;; Clojure has a quite unique support for numerical values.
+;; As you would expect every number just evaluates to itself.
+;;
+;; #### Integers
+;;
+;; They are mapped to `java.lang.Long`, but since they can
+;; be indefinitely large they can be promoted to `clojure.lang.BigInt`
+;; once they go beyond the `java.lang.Long#MAX_VALUE`.
 
+1 ;;=> 1
+-4 ;;=> -4
 
+9223372036854775807   ; java.lang.Long#MAX_VALUE
+;;=> 9223372036854775807
+
+(type 1)
+;;=> java.lang.Long
+
+(type 9223372036854775807)
+;;=> java.lang.Long
+
+29384756298374652983746528376529837456
+;;=> 29384756298374652983746528376529837456N
+
+(type 29384756298374652983746528376529837456)
+;;=> clojure.lang.BigInt
+
+(type 1N)
+;;=> clojure.lang.BigInt
+
+;;
+;; You can also define integers literals in other basis
+;; such as octal, hexadecimals and binary.
+;;
+
+127 ;;=> 127
+0x7F ;;=> 127
+0177 ;;=> 127
+32r3V ;;=> 127
+2r01111111 ;;=> 127
+
+36rClojure ;;=> 27432414842
+2r0111001101010001001001 ;;=> 1889353
+
+;;
+;; In Clojure there are no operators, in fact `+`, `-`, `*` and `/`
+;; are normal functions. You can access static fields by adding
+;; providing the fully qualified class name followed by a slash (`/`)
+;; and the field name, for example: `java.lang.Long/MAX_VALUE`.
+;;
+(+ 1 2 3 4 5)
+;;=> 15
+
+(+ 1 java.lang.Long/MAX_VALUE)
+;;=> ArithmeticException integer overflow
 
 
 ;;
