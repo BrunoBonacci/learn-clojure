@@ -159,11 +159,12 @@ false
 ;; such as octal, hexadecimals and binary.
 ;;
 
-127 ;;=> 127
-0x7F ;;=> 127
-0177 ;;=> 127
-32r3V ;;=> 127
-2r01111111 ;;=> 127
+127 ;;=> 127              ; decimal
+0x7F ;;=> 127             ; hexadecimal
+0177 ;;=> 127             ; octal
+32r3V ;;=> 127            ; base 32
+2r01111111 ;;=> 127       ; binary
+36r3J ;;=> 127            ; base 36
 
 36rClojure ;;=> 27432414842
 2r0111001101010001001001 ;;=> 1889353
@@ -237,8 +238,7 @@ java.lang.Long/MAX_VALUE
 ;;=> 1.0M
 
 (/ 1.0M 3.0M)
-;;=> ArithmeticException Non-terminating decimal expansion;
-;;   no exact representable decimal result.
+;;=> ArithmeticException Non-terminating decimal expansion; no exact representable decimal result.
 
 (with-precision 10 (/ 1.0M 3.0M))
 ;;=> 0.3333333333M
