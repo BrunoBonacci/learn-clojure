@@ -1,14 +1,17 @@
 # learn-clojure
 
-A Clojure library designed to ... well, that part is up to you.
+## Clojure Basics
 
-## Usage
+This project contains code and documentation for a introductory
+Clojure course.
 
-FIXME
+The following sections are described:
 
-## License
-
-Copyright © 2016 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+  * Clojure syntax and the function call
+  * Boolean values
+  * Numbers
+    * Integer values
+    * Decimals values
+      * Floating point
+      * BigDecimal
+    * Rationals
