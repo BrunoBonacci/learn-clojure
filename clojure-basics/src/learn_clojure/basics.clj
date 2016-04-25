@@ -170,16 +170,97 @@ false
 
 ;;
 ;; In Clojure there are no operators, in fact `+`, `-`, `*` and `/`
-;; are normal functions. You can access static fields by adding
-;; providing the fully qualified class name followed by a slash (`/`)
-;; and the field name, for example: `java.lang.Long/MAX_VALUE`.
-;;
+;; are normal functions.
+
 (+ 1 2 3 4 5)
 ;;=> 15
+
+;;
+;; You can access static fields by adding providing the fully
+;; qualified class name followed by a slash (`/`) and the field name,
+;; for example: `java.lang.Long/MAX_VALUE`.
+;;
+
+java.lang.Long/MAX_VALUE
+;;=> 9223372036854775807
+
+(- java.lang.Long/MAX_VALUE 1)
+;;=> 9223372036854775806
 
 (+ 1 java.lang.Long/MAX_VALUE)
 ;;=> ArithmeticException integer overflow
 
+
+;;
+;; Clojure has a number of functions which will automatically
+;; auto-promote the number to be bigger type in case it doesn't
+;; fit in the 64bit Java Long object. These functions are:
+;; `+'`, `-'` and `*'`
+;;
+
+(+' 1 java.lang.Long/MAX_VALUE)
+;;=> 9223372036854775808N
+
+(*' java.lang.Long/MAX_VALUE java.lang.Long/MAX_VALUE)
+;;=> 85070591730234615847396907784232501249N
+
+
+;;
+;; #### Decimals
+;;
+;; Clojure supports floating point decimals and exact decimals.
+;; Floating point decimals are mapped to `java.lang.Double` and they
+;; evaluate to themselves. While exact decimals are mapped to
+;; `java.math.BigDecimal` and they also evaluate to themselves.  Use
+;; the latter when you require exact decimals but be careful to
+;; numbers which can't be represented with exact decimals like: 1
+;; divided by 3 (0.3333333...) as the the decimal part continue
+;; forever.
+;;
+
+3.2
+;;=> 3.2
+
+(type 3.2)
+;;=> java.lang.Double
+
+3.2M
+;;=> 3.2M
+
+(type 3.2M)
+;;=> java.math.BigDecimal
+
+(+ 0.3 0.3 0.3 0.1) ;; floating point
+;;=> 0.9999999999999999
+
+(+ 0.3M 0.3M 0.3M 0.1M) ;; big-decimal
+;;=> 1.0M
+
+(/ 1.0M 3.0M)
+;;=> ArithmeticException Non-terminating decimal expansion;
+;;   no exact representable decimal result.
+
+(with-precision 10 (/ 1.0M 3.0M))
+;;=> 0.3333333333M
+
+;;
+;; #### Rationals
+;;
+;; Number like 1 divided by 3 are called rational numbers,
+;; and Clojure supports them.
+;;
+
+(/ 1 3)
+;;=> 1/3
+
+(type 1/3)
+;;=> clojure.lang.Ratio
+
+(+ 1/3 1/3 1/3)
+;;=> 1N
+
+(/ 21 6)
+;;=> 7/2
 
 ;;
 ;; ### test.
