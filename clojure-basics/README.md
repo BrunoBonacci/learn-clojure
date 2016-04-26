@@ -7,6 +7,7 @@ Clojure course.
 
 The following sections are described:
 
+  * The REPL
   * Clojure syntax and the function call
   * Boolean values and `nil`
     * Logical truthiness

@@ -73,7 +73,7 @@
 ;;     (+ 1 1)
 ;;     ;;=> 2
 ;;
-;; ### Booleans<a name="here">&nbsp;</a>
+;; ### Booleans
 ;;
 ;; In Clojure we have boolean values like in many other languages.  No
 ;; surprise here we have two values `true` and `false` which just
@@ -247,7 +247,9 @@ java.lang.Long/MAX_VALUE
 ;; #### Rationals
 ;;
 ;; Number like 1 divided by 3 are called rational numbers,
-;; and Clojure supports them.
+;; and Clojure supports them. You can mix then in your
+;; calculation and as long as you don't put floating point
+;; values it will retain the precision.
 ;;
 
 (/ 1 3)
@@ -262,13 +264,37 @@ java.lang.Long/MAX_VALUE
 (/ 21 6)
 ;;=> 7/2
 
-;;
-;; ### test.
+(+ 1/3 1/3 1/3 1)
+;; => 2N
 
-(*
- (+ 1 2 3 4)
- (- 12 3 4)
- )
+(+ 1/3 1/3 0.333)
+;; => 0.9996666666666667
+
 
 ;;
-;; end.
+;;
+;; ### Characters
+;;
+;; So far we have seen the rich support for numerical values in Clojure.
+;; Clojure does support characters and strings literals as well.
+;; Characters map to `java.lang.Character`, support Unicode characters
+;; and as all value-types they evaluate to themselves.
+;;
+
+\a       ; this is the character 'a'
+\A       ; this is the character 'A'
+\\       ; this is the character '\'
+\u0041   ; this is unicode for  'A'
+\tab     ; this is the tab character
+\newline ; this is the newline character
+\space   ; this is the space character
+
+\a ;;=> \a
+
+(type \a)
+;;=> java.lang.Character
+
+;;
+;;
+;; ### Strings
+;;
