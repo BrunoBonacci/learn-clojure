@@ -323,8 +323,8 @@ java.lang.Long/MAX_VALUE
 ;;=> "THIS IS A STRING"
 
 ;;
-;; You can use the function `str`
-;; to concatenate strings or to convert numbers into strings.
+;; You can use the function `str` to concatenate strings or to convert
+;; numbers into strings (via `Object#toString()` method).
 ;;
 
 (str "This" " is " "a" " concatenation.")
@@ -332,6 +332,51 @@ java.lang.Long/MAX_VALUE
 
 (str "Number of lines: " 123)
 ;;=> "Number of lines: 123"
+
+
+;;
+;; ### Keywords
+;;
+;; Keywords are labels for things in our programs, they evaluate to themselves
+;; and can be used to give name to things similarly to Java's enumerations.
+;; They mostly used as key in maps (we will see this later), and the Clojure
+;; runtime maintains them in a internal pool (similarly to interned strings in Java.)
+;; which guarantee that only one copy of a particular keyword will ever exist in a
+;; program. For this reason they provide very fast equality test.
+;; Equality test in Clojure is done via the function `=` with the same semantic
+;; as the Java's `.equals()` method, while the identity equality is done via
+;; the function `identical?` which in turn implements the Java's `==` operator.
+;; You can use the function `keyword` to create a keyword out of a string.
+;;
+
+
+:words
+;;=> :words
+
+(type :this-is-a-keyword)
+;;=> clojure.lang.Keyword
+
+(keyword "blue")
+;;=> :blue
+
+(= :blue :blue)
+;;=> true
+
+(= (str "bl" "ue") (str "bl" "ue"))
+;;=> true
+
+(identical? :blue :blue)
+;;=> true
+
+(identical? (str "bl" "ue") (str "bl" "ue"))
+;;=> false
+
+(identical? (keyword (str "bl" "ue")) (keyword (str "bl" "ue")))
+;;=> true
+
+;;
+;; ### Symbols
+;;
 
 ;;
 ;;
