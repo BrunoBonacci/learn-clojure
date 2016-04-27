@@ -298,3 +298,41 @@ java.lang.Long/MAX_VALUE
 ;;
 ;; ### Strings
 ;;
+;; Strings literals have no surprise. They map to `java.lang.String`,
+;; they are multi-line, like in Java they are immutable and they evaluate
+;; to themselves.
+;;
+
+"This is a string"
+;;=> "This is a string"
+
+(type "This is a string")
+;;=> java.lang.String
+
+"Strings in Clojure
+ can be multi lines
+ as well!!"
+;;=> "Strings in Clojure\n can be multi lines\n as well!!"
+
+;;
+;; Via the Java interop. infrastructure you can call
+;; all `java.lang.String` methods directly
+;;
+
+(.toUpperCase "This is a String")
+;;=> "THIS IS A STRING"
+
+;;
+;; You can use the function `str`
+;; to concatenate strings or to convert numbers into strings.
+;;
+
+(str "This" " is " "a" " concatenation.")
+;;=> "This is a concatenation."
+
+(str "Number of lines: " 123)
+;;=> "Number of lines: 123"
+
+;;
+;;
+;;
