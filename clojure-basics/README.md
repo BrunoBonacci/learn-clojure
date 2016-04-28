@@ -10,7 +10,7 @@ The following sections are described:
   * The REPL
   * Clojure syntax and the function call
   * Boolean values and `nil`
-    * Logical truthiness
+    * Logical truth
   * Numbers
     * Integer values
     * Decimals values
@@ -20,12 +20,13 @@ The following sections are described:
   * Characters
   * Strings
   * Keywords
-  * Symbols
   * Collections
     * Lists
     * Vectors
     * Maps
     * Sets
+  * Regular expression patterns
+  * Symbols
   * Immutability
   * Functions
     * what is a function
@@ -37,8 +38,13 @@ The following sections are described:
   * The sequence abstraction
   * Core functions
     * map
+    * apply
     * reduce
     * filter
     * group-by
     * sort
     * partition
+    * into
+  * Operations with files
+    * slurp
+    * spits

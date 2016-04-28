@@ -375,8 +375,37 @@ java.lang.Long/MAX_VALUE
 ;;=> true
 
 ;;
+;; ### Collections
+;;
+;; In Java the only collection literals available is the array.
+;; Clojure like most of modern languages offers a variety of
+;; collection literals which makes the language more expressive,
+;; out-of-the-box are supported the following collections literals:
+;; single linked lists, vectors, maps (or dictionaries) and sets.
+;; However Clojure supports a larger number of data structures
+;; which are built with functions such as: sorted maps, sorted sets,
+;; array maps, hash maps, hash sets and many more are available
+;; in community maintained library such as graphs, ring buffers
+;; and AVL trees.
+;;
+;;
+;; #### Lists
+
+;;
+;; ### Regular expression patterns
+;;
+;; Clojure supports also regular expression patterns as literals
+;; which directly map to the `java.util.Pattern` and offers a number
+;; of function to match, find and extract patterns.
+;;
+
+
+
+;;
 ;; ### Symbols
 ;;
+
+
 
 ;;
 ;;
