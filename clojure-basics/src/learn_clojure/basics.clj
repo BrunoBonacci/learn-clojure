@@ -265,10 +265,10 @@ java.lang.Long/MAX_VALUE
 ;;=> 7/2
 
 (+ 1/3 1/3 1/3 1)
-;; => 2N
+;;=> 2N
 
 (+ 1/3 1/3 0.333)
-;; => 0.9996666666666667
+;;=> 0.9996666666666667
 
 
 ;;
@@ -398,16 +398,16 @@ java.lang.Long/MAX_VALUE
 ;; and element search.
 ;;
 
-;;; to create a list you can use the function `list`
+; to create a list you can use the function `list`
 (list 1 2 3 4 5)
 ;;=> (1 2 3 4 5)
 
-;;; to "add" an element on the front of the list you can
-;;; use the `cons` function.
+; to "add" an element on the front of the list you can
+; use the `cons` function.
 (cons 0 (list 1 2 3 4 5))
 ;;=> (0 1 2 3 4 5)
 
-;; as the output suggest the lists literals in Clojure are expressed
+;; As the output suggest the lists literals in Clojure are expressed
 ;; with a sequence of values surrounded by brackets,
 ;; which is the same of the function call. That is the reason why
 ;; the following line throws an error.
@@ -468,7 +468,7 @@ java.lang.Long/MAX_VALUE
 ;;=> 2
 
 (nth '(1 2 3 4 5) 10)
-;; IndexOutOfBoundsException
+;;=> IndexOutOfBoundsException
 
 (nth '(1 2 3 4 5) 10 :not-found)
 ;;=> :not-found
@@ -511,6 +511,18 @@ java.lang.Long/MAX_VALUE
 
 (first [:a :b :c])
 ;;=> :a
+
+(get [:a :b :c] 1)
+;;=> :b
+
+([:a :b :c] 1)
+;;=> :b
+
+(get [:a :b :c] 10)
+;;=> nil
+
+(get [:a :b :c] 10 :z)
+;;=> :z
 
 ;;
 ;; #### Maps
