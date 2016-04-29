@@ -487,7 +487,7 @@ java.lang.Long/MAX_VALUE
 ;;
 ;; Vectors are collections of values which are indexed by their position
 ;; in the vector (starting from 0) called **index**. Insertion at the end of the vector
-;; is `O(1)` as well as retrieval of an element by it's index.
+;; is `near O(1)` as well as retrieval of an element by it's index.
 ;; The literals is expressed with a sequence of values surrounded by square
 ;; brackets or you can use the `vector` function to construct one.
 ;; You can append an element at the end of the vector with `conj` and use `get`
@@ -515,8 +515,60 @@ java.lang.Long/MAX_VALUE
 ;;
 ;; #### Maps
 ;;
-;;
+;; Maps are associative data structures (often called dictionaries)
+;; which maps keys to their corresponding value.
+;; Maps have a literals form which it can be expressed by any number
+;; of key/value pairs surrounded by curly brackets, or by using
+;; `hash-map` or `array-map` functions. Hash-maps provides a `near O(1)`
+;; insertion time and `near O(1)` seek time.
+;; You can use `assoc` to "add or overwrite" an new pair, `dissoc` to
+;; "remove" a key and its value, and use `get` to retrieve the value
+;; of a given key.
 
+{"jane" "jane@acme.com"
+ "fred" "fred@acme.com"
+ "rob"  "rob@acme.com"}
+;;=> {"jane" "jane@acme.com", "fred" "fred@acme.com", "rob" "rob@acme.com"}
+
+{:a 1, :b 2, :c 3}
+;;=> {:a 1, :b 2, :c 3}
+
+(hash-map :a 1, :b 2, :c 3)
+;;=> {:c 3, :b 2, :a 1}
+
+(array-map :a 1, :b 2, :c 3)
+;;=> {:a 1, :b 2, :c 3}
+
+(assoc {:a 1, :b 2, :c 3} :d 4)
+;;=> {:a 1, :b 2, :c 3, :d 4}
+
+(assoc {:a 1, :b 2, :c 3} :b 10)
+;;=> {:a 1, :b 10, :c 3}
+
+(dissoc {:a 1, :b 2, :c 3} :b)
+;;=> {:a 1, :c 3}
+
+(count {:a 1, :b 2, :c 3})
+;;=> 3
+
+(get {:a 1, :b 2, :c 3} :a)
+;;=> 1
+
+(get {:a 1, :b 2, :c 3} :a :not-found)
+;;=> 1
+
+(get {:a 1, :b 2, :c 3} :ZULU :not-found)
+;;=> :not-found
+
+(:a {:a 1, :b 2, :c 3})
+;;=> 1
+
+({:a 1, :b 2, :c 3} :a)
+;;=> 1
+
+;;
+;; #### Sets
+;;
 
 ;;
 ;; ### Regular expression patterns

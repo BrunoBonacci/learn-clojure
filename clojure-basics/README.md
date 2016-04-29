@@ -35,7 +35,15 @@ The following sections are described:
     * high-order functions
     * anonymous functions
     * lambdas
+    * recursion
+  * Vars, scope, and local bindings
   * The sequence abstraction
+  * Destructuring
+  * Flow control
+    * if
+    * when
+    * cond
+    * case
   * Core functions
     * map
     * apply
