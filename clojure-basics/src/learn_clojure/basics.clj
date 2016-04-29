@@ -386,10 +386,137 @@ java.lang.Long/MAX_VALUE
 ;; which are built with functions such as: sorted maps, sorted sets,
 ;; array maps, hash maps, hash sets and many more are available
 ;; in community maintained library such as graphs, ring buffers
-;; and AVL trees.
+;; and AVL trees. **All Clojure collections can contain
+;; a mixture of values**.
 ;;
 ;;
 ;; #### Lists
+;;
+;; Clojure has single-linked lists built-in and like all other
+;; Clojure collections are immutable.
+;; Lists guarantee `O(1)` insertion on the head, `O(n)` traversal
+;; and element search.
+;;
+
+;;; to create a list you can use the function `list`
+(list 1 2 3 4 5)
+;;=> (1 2 3 4 5)
+
+;;; to "add" an element on the front of the list you can
+;;; use the `cons` function.
+(cons 0 (list 1 2 3 4 5))
+;;=> (0 1 2 3 4 5)
+
+;; as the output suggest the lists literals in Clojure are expressed
+;; with a sequence of values surrounded by brackets,
+;; which is the same of the function call. That is the reason why
+;; the following line throws an error.
+
+(1 2 3 4 5)
+;;=> ClassCastException java.lang.Long cannot be cast to clojure.lang.IFn
+
+;; To be able to express a list of values as a literal we have to used
+;; the `quote` form which it will preserve the list without initiate
+;; the function call.
+
+(quote (1 2 3 4 5))
+;;=> (1 2 3 4 5)
+
+;;
+;; As syntax sugar we can use the single quote sign `'` instead of the
+;; longer `(quote ,,,)` form.
+;;
+
+'(1 2 3 4 5)
+;;=> (1 2 3 4 5)
+
+'(1 "hi" :test 4/5 \c)
+;;=> (1 "hi" :test 4/5 \c)
+
+;;
+;; you can get the head of the list with the function `first`
+;; and use `rest` or `next` to get the tail. `count` returns
+;; the number of elements in it. `nth` returns the nth element
+;; of the list, while `last` returns last item in the list.
+;;
+
+(first '(1 2 3 4 5))
+;;=> 1
+
+(rest '(1 2 3 4 5))
+;;=> (2 3 4 5)
+
+(next '(1 2 3 4 5))
+;;=> (2 3 4 5)
+
+(rest '(1))
+;;=> ()
+
+(next '(1))
+;;=> nil
+
+(count '(5))
+;;=> 1
+
+(count '(1 2 3 4 5))
+;;=> 5
+
+(nth '(1 2 3 4 5) 0)
+;;=> 1
+
+(nth '(1 2 3 4 5) 1)
+;;=> 2
+
+(nth '(1 2 3 4 5) 10)
+;; IndexOutOfBoundsException
+
+(nth '(1 2 3 4 5) 10 :not-found)
+;;=> :not-found
+
+(last '(1 2 3 4 5))
+;;=> 5
+
+(last '(1))
+;;=> 1
+
+(last '())
+;;=> nil
+
+;;
+;; #### Vectors
+;;
+;; Vectors are collections of values which are indexed by their position
+;; in the vector (starting from 0) called **index**. Insertion at the end of the vector
+;; is `O(1)` as well as retrieval of an element by it's index.
+;; The literals is expressed with a sequence of values surrounded by square
+;; brackets or you can use the `vector` function to construct one.
+;; You can append an element at the end of the vector with `conj` and use `get`
+;; to retrieve an element in a specific index. Function such as `first`, `next`
+;; `rest`, `last` and `count` will work just as fine with Vectors.
+
+[1 2 3 4 5]
+;;=> [1 2 3 4 5]
+
+[1 "hi" :test 4/5 \c]
+;;=> [1 "hi" :test 4/5 \c]
+
+(vector 1 2 3 4 5)
+;;=> [1 2 3 4 5]
+
+(conj [1 2 3 4 5] 6)
+;;=> [1 2 3 4 5 6]
+
+(count [1 2])
+;;=> 2
+
+(first [:a :b :c])
+;;=> :a
+
+;;
+;; #### Maps
+;;
+;;
+
 
 ;;
 ;; ### Regular expression patterns
