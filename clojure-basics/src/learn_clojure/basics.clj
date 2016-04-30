@@ -581,6 +581,51 @@ java.lang.Long/MAX_VALUE
 ;;
 ;; #### Sets
 ;;
+;; Sets are a type of collection which doesn't allow for duplicate values.
+;; While lists and vector can have duplicate elements, set eliminates
+;; all duplicates.
+;; Clojure has a literal form for sets which is expressed by a
+;; sequence of values surrounded by `#{  }`. Otherwhise you
+;; construct a set using the `set` function.
+;; With `conj` you can "add" a new element to an existing set,
+;; and `disj` to "remove" an element from the set.
+;; With `clojure.set/union`, `clojure.set/difference` and
+;; `clojure.set/intersection` you have typical sets operations.
+;; `count` returns the number of elements in the set in `O(1)`
+;; time.
+
+#{1 2 4}
+;;=> #{1 4 2}
+
+#{ 1 1 3 5}
+;;=> IllegalArgumentException Duplicate key: 1
+
+#{:a 4 5 :d "hello"}
+;;=> #{"hello" 4 5 :d :a}
+
+(type #{:a :z})
+;;=> clojure.lang.PersistentHashSet
+
+(set [:a :b :c])
+;;=> #{:c :b :a}
+
+(conj #{:a :c} :b)
+;;=> #{:c :b :a}
+
+(conj #{:a :c} :c)
+;;=> #{:c :a}
+
+(disj #{:a :b :c} :b)
+;;=> #{:c :a}
+
+(clojure.set/union #{:a} #{:a :b} #{:c :a})
+;;=> #{:c :b :a}
+
+(clojure.set/difference #{:a :b} #{:c :a})
+;;=> #{:b}
+
+(clojure.set/intersection #{:a :b} #{:c :a})
+;;=> #{:a}
 
 ;;
 ;; ### Regular expression patterns
