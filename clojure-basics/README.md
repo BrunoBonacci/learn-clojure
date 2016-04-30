@@ -25,19 +25,18 @@ The following sections are described:
     * Vectors
     * Maps
     * Sets
+  * The sequence abstraction
   * Regular expression patterns
   * Symbols
   * Immutability
   * Functions
     * what is a function
     * arity
-    * scope
     * high-order functions
     * anonymous functions
     * lambdas
     * recursion
   * Vars, scope, and local bindings
-  * The sequence abstraction
   * Destructuring
   * Flow control
     * if
