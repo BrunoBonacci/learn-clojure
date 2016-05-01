@@ -627,6 +627,97 @@ java.lang.Long/MAX_VALUE
 (clojure.set/intersection #{:a :b} #{:c :a})
 ;;=> #{:a}
 
+
+;;
+;; ### The sequence abstraction
+;;
+;; One of the most powerful abstraction of Clojure's data structures
+;; is the `sequence` (`clojure.lang.ISeq`) which all data structure
+;; implements. This interface resembles to a Java iterator,
+;; and it implements methods like `first()`, `rest()`, `more()` and
+;; `cons()`. The power of this abstraction is that is general enough
+;; to be used in all data structures (lists, vectors, maps, sets and
+;; even strings can all produce sequences) and you have loads of
+;; functions which manipulates them. Functions such as `first`,
+;; `rest`, `next` and `last` and many others such as `reverse`,
+;; `shuffle`, `drop`, `take`, `partition`, `filter` etc
+;; are all built on top of the sequence abstraction.
+;; So if you create your own data-structure and you implement
+;; the four methods of the `clojure.lang.ISeq` interface
+;; you can benefit from all these function without having
+;; to re-implement them for your specific data-structure.
+;;
+;; You can create a sequence explicitly with the `seq` function
+;; but there are loads of function which already return a
+;; sequence. The sequence of a list is the list itself,
+;; other data-structures will produce one.
+;; Maps will produce a sequence of map entry, where each
+;; entry can be represented like a vector of two values
+;; the key and it's value.
+;;
+
+(seq '(1 2 3 4))
+;;=> (1 2 3 4)
+
+(seq [1 2 3 4])
+;;=> (1 2 3 4)
+
+(seq #{1 2 3 4})
+;;=> (1 4 3 2)
+
+(seq {:a 1, :b 2, :c 3})
+;;=> ([:a 1] [:b 2] [:c 3])
+
+;;
+;; There is no need to call `seq` explicitly in most of the cases
+;; all function which takes a sequence can work with all data structures
+;; directly.
+;;
+
+(first [1 2 3 4])
+;;=> 1
+
+(take 3 [:a :b :c :d])
+;;=> (:a :b :c)
+
+(shuffle [1 2 3 4])
+;;=> [1 3 2 4]
+
+(shuffle #{1 2 3 4})
+;;=> [2 4 1 3]
+
+(reverse [1 2 3 4])
+;;=> (4 3 2 1)
+
+(last (reverse {:a 1 :b 2 :c 3}))
+;;=> [:a 1]
+
+
+;;
+;; #### Lazy Sequences
+;;
+;; Some of the sequences produced by the core library are lazy
+;; which means that the entire collection won't be create,
+;; but at first only the iterator like structure is created
+;; while the consumer is fetching the `next()` item it will
+;; be computed. This is a very important element of the language
+;; which allows to express easily infinite sequences without running
+;; out of memory. For example the function `range` returns a lazy sequence
+;; of natural numbers between two given numbers. But when it is
+;; called without arguments it returns a lazy sequence of all natural numbers.
+;; Yet it doesn't run out of memory. What it really produce it is just a
+;; iterator that computes the next number when the `next()` is called.
+;;
+
+(range 5 10)
+;;=> (5 6 7 8 9)
+
+(range)
+;;=> (0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 ...)
+
+(take 10 (range))
+;;=> (0 1 2 3 4 5 6 7 8 9)
+
 ;;
 ;; ### Regular expression patterns
 ;;
