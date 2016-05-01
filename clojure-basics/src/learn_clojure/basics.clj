@@ -724,15 +724,48 @@ java.lang.Long/MAX_VALUE
 ;; Clojure supports also regular expression patterns as literals
 ;; which directly map to the `java.util.Pattern` and offers a number
 ;; of function to match, find and extract patterns.
+;; For example: `re-find` and `re-seq` to find respectively the first
+;; or all occurrences of a matching pattern. With `re-pattern` you
+;; can programmatically create a function out of a string.
 ;;
 
+#"[\w\d.-]+@[\w\d-.]+\.[\w]+"
+;;=> #"[\w\d.-]+@[\w\d-.]+\.[\w]+"
+
+(type #"[\w\d.-]+@[\w\d-.]+\.[\w]+")
+;;=> java.util.regex.Pattern
+
+(re-find #"[0-9]+" "only 123 numbers")
+;;=> "123"
+
+(re-find #"[0-9]+" "no numbers")
+;;=> nil
+
+(re-find #"[\w\d.-]+@[\w\d-.]+\.[\w]+" "bob.smith@acme.org")
+;;=> "bob.smith@acme.org"
+
+(if (re-find #"^[\w\d.-]+@[\w\d-.]+\.[\w]+$" "bob.smith@acme.org")
+  "it's an email"
+  "it's not an email")
+;;=> "it's an email"
+
+(re-seq #"[0-9]+" "25, 43, 54, 12, 15, 65")
+;;=> ("25" "43" "54" "12" "15" "65")
+
+(re-pattern "[0-9]{1,3}(\\.[0-9]{1,3}){3}")
+;;=> #"[0-9]{1,3}(\.[0-9]{1,3}){3}"
+
+(re-find (re-pattern "[0-9]{1,3}(\\.[0-9]{1,3}){3}") "my ip is: 192.168.0.12")
+;;=> ["192.168.0.12" ".12"]
+
+;;
+;; Using `re-matcher`, `re-matches`, `re-groups` you can have fine
+;; control over the capturing groups.
 
 
 ;;
 ;; ### Symbols
 ;;
-
-
 
 ;;
 ;;
