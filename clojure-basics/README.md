@@ -31,7 +31,7 @@ The following sections are described:
   * Immutability
   * Functions
     * what is a function
-    * arity
+    * function arity
     * high-order functions
     * anonymous functions
     * lambdas
@@ -54,4 +54,4 @@ The following sections are described:
     * into
   * Operations with files
     * slurp
-    * spits
+    * spit
