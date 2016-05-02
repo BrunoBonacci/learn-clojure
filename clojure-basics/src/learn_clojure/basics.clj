@@ -760,6 +760,23 @@ java.lang.Long/MAX_VALUE
 (last (reverse {:a 1 :b 2 :c 3}))
 ;;=> [:a 1]
 
+;;
+;; Because the Clojure String implements the sequence
+;; abstraction you can treat the String as a sequence
+;; of characters.
+;;
+
+(seq "Hello World!")
+;;=> (\H \e \l \l \o \space \W \o \r \l \d \!)
+
+(first "Hello")
+;;=> \H
+
+(rest "Hello")
+;;=> (\e \l \l \o)
+
+(count "Hello World!")
+;;=> 12
 
 ;;
 ;; #### Lazy Sequences
