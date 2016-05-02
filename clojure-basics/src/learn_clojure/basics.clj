@@ -817,10 +817,12 @@ java.lang.Long/MAX_VALUE
 (re-find #"[0-9]+" "no numbers")
 ;;=> nil
 
-(re-find #"[\w\d.-]+@[\w\d-.]+\.[\w]+" "bob.smith@acme.org")
+(re-find #"[\w\d.-]+@[\w\d-.]+\.[\w]+"
+         "bob.smith@acme.org")
 ;;=> "bob.smith@acme.org"
 
-(if (re-find #"^[\w\d.-]+@[\w\d-.]+\.[\w]+$" "bob.smith@acme.org")
+(if (re-find #"^[\w\d.-]+@[\w\d-.]+\.[\w]+$"
+             "bob.smith@acme.org")
   "it's an email"
   "it's not an email")
 ;;=> "it's an email"
@@ -831,7 +833,9 @@ java.lang.Long/MAX_VALUE
 (re-pattern "[0-9]{1,3}(\\.[0-9]{1,3}){3}")
 ;;=> #"[0-9]{1,3}(\.[0-9]{1,3}){3}"
 
-(re-find (re-pattern "[0-9]{1,3}(\\.[0-9]{1,3}){3}") "my IP is: 192.168.0.12")
+(re-find
+ (re-pattern "[0-9]{1,3}(\\.[0-9]{1,3}){3}")
+ "my IP is: 192.168.0.12")
 ;;=> ["192.168.0.12" ".12"]
 
 ;;
@@ -842,6 +846,7 @@ java.lang.Long/MAX_VALUE
 
 ;;
 ;; ### Symbols
+;;
 ;;
 
 ;;
