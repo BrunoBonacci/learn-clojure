@@ -862,8 +862,110 @@ java.lang.Long/MAX_VALUE
 
 
 ;;
-;; ### Symbols
+;; ### Symbols and Vars
 ;;
+;; Symbols in Clojure are a way to identify things
+;; in your programs which my have various values
+;; at runtime. Like in mathematical notation `x`
+;; is something not known which could assume
+;; several different values.  In a programming
+;; context, Clojure symbols are similar to
+;; variables in other languages but not exactly.
+;; In other languages variables are places where
+;; you store information, symbols in Clojure
+;; cannot contain data themselves.  Vars in
+;; Clojure are the containers of data (one type
+;; of), and symbols are a way to identify them and
+;; give vars meaningful names for your program.
+;;
+;; Everything we have seen so far were pure
+;; values, as such they were all evaluating to
+;; themselves.  Like `42` is just `42`, a the
+;; following vector `[:a "hello" 9]` it just
+;; evaluate to itself, it's just a value.
+;; Symbols, however, during the evaluation
+;; are replaced with the current value of var
+;; they are pointing to. If you try to evaluate
+;; a var which is undefined you will get an error.
+;;
+;; Symbols are organised into namespaces.  We will
+;; not explore much about namespaces here, but it
+;; will suffice to know that symbols belong to a
+;; namespace in which they assume a particular
+;; value, and you can have the same symbol name in
+;; different namesapce pointing to different
+;; values.
+;;
+;; In Clojure symbols start with a letter, and can contains
+;; letters, numbers, dashes, some punctuation mark and other
+;; characters. Basically anything which doesn't belong the
+;; Clojure syntax (following caracters aren't accepted in
+;; symbols name `@#,'/.[]{}()`) anything else is a valid
+;; symbol.
+;;
+;; You can create symbols by quoting a word with
+;; the `quote` function or the single quote
+;; character, you can use the function `symbol`,
+;; but most commonly you will use symbols in place
+;; of vars and locals which are define with the
+;; special forms `def` and `let` respectively. A
+;; symbol name which is NOT quoted will be
+;; resolved to the current value of the associated
+;; var.
+;;
+;; As we will see in the following examples symbols
+;; are un-typed and can refer to any Clojure value,
+;; including `nil`
+;;
+
+(symbol "username")
+;;=> username
+
+(type (symbol "username"))
+;;=> clojure.lang.Symbol
+
+(type 'username)
+;;=> clojure.lang.Symbol
+
+(def username "bruno1")
+;;=> #'learn-clojure.basics/username
+
+username
+;;=> "bruno1"
+
+age ;; undefined var produces error
+;;=> Unable to resolve symbol: age in this context
+
+(def age 21)
+;;=> #'learn-clojure.basics/age
+
+age
+;;=> 21
+
+(type 'age)
+;;=> clojure.lang.Symbol
+
+(type age)
+;;=> java.lang.Long
+
+(def user {:username "bruno1"
+           :score    12345
+           :level    32
+           :achievements #{:fast-run :precision10
+                           :strategy}})
+
+user
+;;=> {:username "bruno1", :score 12345, :level 32, :achievements #{:precision10 :strategy :fast-run}}
+
+(def user nil)
+;;=> #'learn-clojure.basics/user
+
+user
+;;=> nil
+
+
+;;
+;; ### Immutability
 ;;
 
 ;;

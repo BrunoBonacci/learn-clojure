@@ -27,7 +27,7 @@ The following sections are described:
     * Sets
   * The sequence abstraction
   * Regular expression patterns
-  * Symbols
+  * Symbols and Vars
   * Immutability
   * Functions
     * what is a function

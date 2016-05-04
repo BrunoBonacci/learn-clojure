@@ -6,6 +6,13 @@ Curriculum for an introductory course to Clojure.
 
 * Bruno Bonacci
 
+## Setup
+
+If you don't have a development environment already set up
+please follow the instructions at the [following page](https://github.com/ClojureBridge/curriculum/blob/gh-pages/outline/setup.md).
+
+If you have already your environment ready to go, then choose your learning path below.
+
 ## Courses
 
   * [Clojure basics](/clojure-basics)
