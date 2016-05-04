@@ -899,8 +899,8 @@ java.lang.Long/MAX_VALUE
 ;; In Clojure symbols start with a letter, and can contains
 ;; letters, numbers, dashes, some punctuation mark and other
 ;; characters. Basically anything which doesn't belong the
-;; Clojure syntax (following caracters aren't accepted in
-;; symbols name `@#,'/.[]{}()`) anything else is a valid
+;; Clojure syntax (following characters aren't accepted in
+;; symbols name `@#,/.[]{}()`) anything else is a valid
 ;; symbol.
 ;;
 ;; You can create symbols by quoting a word with
@@ -967,6 +967,58 @@ user
 ;;
 ;; ### Immutability
 ;;
+;; All basics data-types in Clojure are immutable,
+;; including the collections. This is a very
+;; important aspect of Clojure approach to
+;; functional programming.  In Clojure functions
+;; transform values into new values and values are
+;; just values. Like it is absurd to think of
+;; changing a number composite data structure
+;; behave in the same way. So function
+;; do not mutate values but just produce new ones.
+;; Like adding `1` to `42` produces `43` but
+;; doesn't really change the number `42` as it keeps on
+;; existing on its own, adding an element to a list will
+;; produce a new list but the old one will still be same
+;; and unmodified.
+;;
+;; The advantage of the immutability is that
+;; values (even deeply nested and complex
+;; structures) can be safely shared across threads
+;; and with function callers without worrying
+;; about unsafe or uncoordinated changes.  This
+;; simple constraint makes Clojure programs so
+;; much easier to reason about, as the only way to
+;; produce a new value is via a functional
+;; transformation.
+;;
+
+(def colours '(:red :green :blue))
+
+(def new-colours (cons :black colours))
+
+new-colours
+;;=> (:black :red :green :blue)
+
+colours
+;;=> (:red :green :blue)
+
+(def user {:username "bruno1"
+           :score    12345
+           :level    32})
+
+(def user' (assoc user :level 33))
+
+user'
+;;=> {:username "bruno1", :score 12345, :level 33}
+
+user
+;;=> {:username "bruno1", :score 12345, :level 32}
+
+;;
+;; ### Functions
+;;
+
 
 ;;
 ;;
