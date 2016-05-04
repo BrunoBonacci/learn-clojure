@@ -16,8 +16,15 @@
 ;; to be already known.
 ;;
 ;;
+;; ### The REPL
+;; TODO:
 ;;
-;; ### The function call.
+;;
+;; ### Clojure syntax
+;; TODO:
+;;
+;;
+;; ### and the function call.
 ;;
 ;; The first concept I will introduce is how to
 ;; make a function call.  We will see more about
@@ -1018,6 +1025,176 @@ user
 ;;
 ;; ### Functions
 ;;
+;; If so far we have see how to represent data in
+;; our system, now we will see how to make sense
+;; of this data, how extract value, process,
+;; transform etc.  The way we express this in
+;; Clojure is via functions.
+;;
+;;
+;; #### Purity
+;;
+;; While Clojure doesn't enforce purity at
+;; compiler level, it certainly promote
+;; pure-functions.  Pure functions are those
+;; functions in which the processing doesn't use
+;; or produce any side effect, which means it will
+;; use only the input parameters to compute the
+;; resulting value, and given the same parameters
+;; it will always produce the same result.
+;;
+;; When a function given a certain input, always
+;; produces the same output it is said to be
+;; __referentially transparent__, because the
+;; function it call itself can be replaced with
+;; its value without altering the rest of the
+;; expression.
+;;
+;; Pure functions are important because
+;; they are incredibly easy to test as
+;; they don't depend from external state.
+;;
+;; Here two example: the first is the function `+`
+;; which we have already seen, and the second
+;; function is `rand-int` which produce a random
+;; integer number between `0` and the given
+;; integer.  While the first is pure because given
+;; the same input parameters always produces the
+;; same output, the second one given the same
+;; input returns a different value every time.
+;;
+
+(+ 1 2 3)
+;;=> 6
+
+(rand-int 100)
+;;=> 18
+
+(rand-int 100)
+;;=> 85
+
+(+ 1 2 (+ 1 1 1)) ;; (+ 1 1 1) is referentially transparent
+;;=> 6
+
+;;
+;; #### Function definition
+;;
+;; To define a function you have to use the special form `fn`
+;; or `defn` with the following syntax.
+;;
+;; for example if we want to define a function which increments
+;; the input parameters by 1 you will write something as follow:
+;;
+;;     /- fn, special form
+;;    /  parameter vector, 1 param called `n`
+;;    |  |  body -> expression to evaluate when
+;;    |  |  |       this function is called
+;;   (fn [n] (+ n 1))
+;;
+;; This is the simplest way to define a function.
+;;
+;; Now to refer to this function on our code we
+;; need to give it a name. We can do so with `def`
+;; as we done earlier.
+;;
+
+(def plus-one (fn [n] (+ n 1)))
+;;=> #'learn-clojure.basics/plus-one
+
+(plus-one 10)
+;;=> 11
+
+(plus-one -42)
+;;=> -41
+
+;;
+;; As said earlier, during the evaluation process the symbol `plus-one`
+;; is simply replaced with its value, in the same way we can replace
+;; the symbol with the function definition and obtain the same result.
+;; So symbols can also refer to functions.
+;;
+
+((fn [n] (+ n 1)) 10)
+;;=> 11
+
+((fn [n] (+ n 1)) -42)
+;;=> -41
+
+;;
+;; Since defining functions is very common there is a shorthand to the
+;; idiom `(def funciton-name (fn [parameter list] (expression)))`
+;; via the `defn` form which just combines the `def` and `fn` forms.
+;; So we can redefine the previous function in the following way:
+;;
+
+(defn plus-one [n]
+  (+ n 1))
+
+(plus-one 1)
+;;=> 2
+
+;;
+;; It is good practice to include a short description (called `docstring`)
+;; to the function.
+;;
+
+(defn plus-one
+  "Returns a number which is one greater than the given `n`."
+  [n]
+  (+ n 1))
+
+;;
+;; **NOTE:** that Clojure core already contains such function and it
+;; is called `inc`.
+;;
+
+(inc 10)
+;;=> 11
+
+;;
+;; #### Function arity
+;;
+
+;;
+;; #### High-order functions
+;;
+
+;;
+;; #### Anonymous functions
+;;
+
+;;
+;; #### Lambdas
+;;
+
+;;
+;; #### Recursion
+;;
+
+;;
+;; ### Vars, scope and local bindings
+;;
+
+
+;;
+;; ### Destructuring
+;;
+
+
+;;
+;; ### Flow control
+;;
+
+
+;;
+;; ### Core functions
+;;
+
+
+;;
+;; ### Operation with files
+;;
+
 
 
 ;;

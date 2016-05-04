@@ -30,7 +30,8 @@ The following sections are described:
   * Symbols and Vars
   * Immutability
   * Functions
-    * what is a function
+    * purity
+    * function definition
     * function arity
     * high-order functions
     * anonymous functions
