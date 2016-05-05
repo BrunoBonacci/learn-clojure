@@ -1152,8 +1152,10 @@ user
 ;;=> 11
 
 ;;
-;; #### Function arity
+;; #### Function multi-arity
 ;;
+;; So far we seen how to create functions with
+;; only one parameter.
 
 ;;
 ;; #### High-order functions
