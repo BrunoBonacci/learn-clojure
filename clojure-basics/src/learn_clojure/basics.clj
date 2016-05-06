@@ -1079,11 +1079,13 @@ user
 ;;
 ;; #### Function definition
 ;;
-;; To define a function you have to use the special form `fn`
-;; or `defn` with the following syntax.
+;; To define a function you have to use the
+;; special form `fn` or `defn` with the following
+;; syntax.
 ;;
-;; for example if we want to define a function which increments
-;; the input parameters by 1 you will write something as follow:
+;; for example if we want to define a function
+;; which increments the input parameters by 1 you
+;; will write something as follow:
 ;;
 ;;     /- fn, special form
 ;;    /  parameter vector, 1 param called `n`
@@ -1108,10 +1110,12 @@ user
 ;;=> -41
 
 ;;
-;; As said earlier, during the evaluation process the symbol `plus-one`
-;; is simply replaced with its value, in the same way we can replace
-;; the symbol with the function definition and obtain the same result.
-;; So symbols can also refer to functions.
+;; As said earlier, during the evaluation process
+;; the symbol `plus-one` is simply replaced with
+;; its value, in the same way we can replace the
+;; symbol with the function definition and obtain
+;; the same result.  So symbols can also refer to
+;; functions.
 ;;
 
 ((fn [n] (+ n 1)) 10)
@@ -1121,10 +1125,12 @@ user
 ;;=> -41
 
 ;;
-;; Since defining functions is very common there is a shorthand to the
-;; idiom `(def funciton-name (fn [parameter list] (expression)))`
-;; via the `defn` form which just combines the `def` and `fn` forms.
-;; So we can redefine the previous function in the following way:
+;; Since defining functions is very common there
+;; is a shorthand to the idiom
+;; `(def funciton-name (fn [parameter list] (expression)))`
+;; via the `defn` form which just combines the `def` and
+;; `fn` forms.  So we can redefine the previous
+;; function in the following way:
 ;;
 
 (defn plus-one [n]
@@ -1144,8 +1150,9 @@ user
   (+ n 1))
 
 ;;
-;; **NOTE:** that Clojure core already contains such function and it
-;; is called `inc`.
+;; **NOTE:** that Clojure core already contains
+;; such function and it is called `inc`, while the
+;; function `dec` decrements by 1 the given value.
 ;;
 
 (inc 10)
@@ -1241,9 +1248,11 @@ user
 ;;
 ;; #### High-order functions
 ;;
-;; In Clojure functions are reified contructs, therefore we can
-;; threat them as normal values. As such functions can be passed
-;; as parameters of function or returned as result of function call.
+;; In Clojure functions are reified contructs,
+;; therefore we can threat them as normal
+;; values. As such functions can be passed as
+;; parameters of function or returned as result of
+;; function call.
 ;;
 
 (defn is-commutative? [op a b]
@@ -1348,7 +1357,8 @@ user
 ;; which returns whether a number is greater or equal
 ;; then the other one.
 ;;
-
+;; Other similar functions are `>`, `<`, `<=`, `=` and `not=`.
+;;
 
 (>= 10 3) ;; like 10 >= 3
 ;;=> true
@@ -1385,7 +1395,170 @@ user
 ;;
 ;; #### Recursion
 ;;
+;; A recursive function is a function which
+;; call itself. There are two type of recursion
+;; the mundane recursion and the tail recursion.
+;;
+;; Let's see an example of both with this function
+;; which given a number it calculates the sum of
+;; all natural number which from 1 to the given
+;; number.
 
+(defn sum1
+  ([n]
+   (sum1 n 0))
+  ([n accumulator]
+   (if (< n 1)
+     accumulator
+     ;; else
+     (sum1 (dec n) (+ n accumulator)))))
+
+
+(sum1 1)
+;;=> 1
+
+(sum1 3)
+;;=> 6
+
+(sum1 10)
+;;=> 55
+
+;;
+;; This type of recursion is called mundane
+;; recursion and every new call it allocates one
+;; new frame on the stack so if you run this with
+;; high enough numbers it will blow your stack.
+;;
+
+(sum1 10000)
+;;=> StackOverflowError
+
+;;
+;; Let's see how we can write this
+;; function with a tail recursion using
+;; `recur`.
+;;
+
+(defn sum2
+  ([n]
+   (sum2 n 0))
+  ([n accumulator]
+   (if (< n 1)
+     accumulator
+     ;; else
+     (recur (dec n) (+ n accumulator)))))
+
+(sum2 10)
+;;=> 55
+
+(sum2 10000)
+;;=> 50005000
+
+(sum2 1000000)
+;;=> 500000500000
+
+(sum2 100000000)
+;;=> 5000000050000000
+
+;;
+;; As you can see the function can recur much
+;; more without exploding this is because
+;; it doesn't consume stack.
+;; The tail recursion can be used only when
+;; when the recursion point is in the tail
+;; position (a return position).
+;;
+;; Now in `sum1` and `sum2` we had to add
+;; another function arity just to keep track
+;; of the `accumulator`. This is very
+;; common in recursion, while recurring
+;; you have to keep track of some
+;; accumulated value, therefore Clojure
+;; make it simpler by providing another
+;; form called `loop` which plays well
+;; with `recur`. In Clojure you'll often
+;; hear about `loop/recur` construct.
+;;
+;; Let's see how we can rewrite the previous
+;; function to leverage the `loop/recur`
+;; construct.
+
+(defn sum3
+  [num]
+  (loop [n           num
+         accumulator 0]
+    (if (< n 1)
+      accumulator
+      ;; else
+      (recur (dec n) (+ n accumulator)))))
+
+(sum3 10)
+;;=> 55
+
+;; Let's see another example with the Fibonacci
+;; sequence. Let's start with the mundane
+;; recursion.
+
+(defn fibonacci1
+  [n]
+  (if (< n 2)
+    1
+    ;; else
+    (+ (fibonacci1 (- n 1))
+       (fibonacci1 (- n 2)))))
+
+
+(fibonacci1 1)
+;;=> 1
+
+(fibonacci1 10)
+;;=> 89
+
+
+;;
+;; Now this is a simple and very functional
+;; definition of the Fibonacci sequence, however
+;; is particularly bad in terms of computational
+;; complexity.  in fact this is `O(2^n)`.
+;; Let's use the `time` function con
+;; calculate how much it takes to compute the
+;; 35th number in the sequence.
+;;
+
+(time
+ (fibonacci1 35))
+;;=> "Elapsed time: 1806.753129 msecs"
+;;=> 14930352
+
+;;
+;; Let's try to use tail recursion.
+;; As you will see we have to restructure
+;; our function to allow the recursion
+;; to happen in the tail position.
+;;
+
+
+(defn fibonacci2
+  [n]
+  (loop [i n c 1 p 1]
+    (if (< i 2)
+      c
+      (recur (dec i) (+' c p) c))))
+
+(fibonacci2 10)
+;;=> 89
+
+(time
+ (fibonacci2 35))
+;;=> "Elapsed time: 0.04467 msecs"
+;;=> 14930352
+
+(time
+ (fibonacci2 1000))
+;;=> "Elapsed time: 1.145227 msecs"
+;;=> 70330367711422815821835254877183549770181269836358732742604905087154537118196933579742249494562611733487750449241765991088186363265450223647106012053374121273867339111198139373125598767690091902245245323403501N
+
+;;
 ;;
 ;; ### Vars, scope and local bindings
 ;;
