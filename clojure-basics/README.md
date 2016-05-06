@@ -34,8 +34,8 @@ The following sections are described:
     * Function definition
     * Function with multi-arities
     * high-order functions
-    * anonymous functions
-    * lambdas
+    * Anonymous functions or lambda functions
+    * Closures
     * recursion
   * Vars, scope, and local bindings
   * Destructuring

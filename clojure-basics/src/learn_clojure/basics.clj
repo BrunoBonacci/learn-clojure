@@ -1241,14 +1241,146 @@ user
 ;;
 ;; #### High-order functions
 ;;
+;; In Clojure functions are reified contructs, therefore we can
+;; threat them as normal values. As such functions can be passed
+;; as parameters of function or returned as result of function call.
+;;
+
+(defn is-commutative? [op a b]
+  (= (op a b) (op b a)))
+
+(is-commutative? + 3 7)
+;;=> true
+
+(is-commutative? / 3 7)
+;;=> false
+
+
+(defn multiplier [m]
+  (fn [n]
+    (* n m)))
+
+(def doubler (multiplier 2))
+
+(doubler 5)
+;;=> 10
+
+(doubler 10)
+;;=> 20
+
+(def mult-10x (multiplier 10))
+
+(mult-10x 35)
+;;=> 350
 
 ;;
-;; #### Anonymous functions
+;; #### Anonymous functions or lambda functions
+;;
+;; Oftentimes you want to create a function for a
+;; specific task in a local context. Such
+;; functions don't have reason to have a global
+;; name as they are meaningful only in that
+;; specific context in this case you can create
+;; anonymous functions (also called lambda
+;; function) and Clojure has some support to make
+;; this easier.  We already seen some example of
+;; anonymous function with our very first function
+;; example.
 ;;
 
+(fn [n] (+ n 1))
+
+((fn [n] (+ n 1)) 10)
+;;=> 11
+
 ;;
-;; #### Lambdas
+;; here the function we built hasn't got a name.
+;; We then used a `def` form to give it the
+;; `plus-one` name.
+;; This anonymous function could also be written
+;; in the following way.
+
+#(+ % 1)
+
+(#(+ % 1) 10)
+;;=> 11
+
 ;;
+;; In this function the symbol `%` replace the argument
+;; If you have more than one parameter you can denote them as
+;; `%1` (or `%`), `%2`, `%3`, `%4` ...
+;;
+;; for example in our `is-commutative?` function we expect
+;; and operation which accept two arguments:
+
+(is-commutative? #(+ %1 %2) 9 8)
+;;=> true
+
+;;
+;; #### Closures
+;;
+;; Closures (with the `s`) are lambdas which refer
+;; to a context (or values from another context).
+;; These functions are said to be "closing over"
+;; the environment. This means that it can access
+;; parameters and values which are NOT in the
+;; parameters list.
+;;
+;; Like in our `multiplier` function example,
+;; the returned function closing over the
+;; value `m` which is not in its parameter list
+;; but it is a parameter of the parent context
+;; the `multiplier`. While `n` is a normal parameter
+;; `m` is the value we are "closing over"
+;; providing a context for that function.
+
+(defn multiplier [m]
+  (fn [n]
+    (* n m)))
+
+;;
+;; Let's see another example. Here
+;; we want to create a function which
+;; takes a number and return a logical true
+;; value is the value of the number
+;; is between two limits (limits included)
+;; For this purpose we can use the function `>=`
+;; which returns whether a number is greater or equal
+;; then the other one.
+;;
+
+
+(>= 10 3) ;; like 10 >= 3
+;;=> true
+
+(>= 3 10)
+;;=> false
+
+(>= 6 6)
+;;=> true
+
+(>= 6 5 2)
+;;=> true
+
+
+(defn limit-checker [min max]
+  (fn [n]
+    (>= max n min)))
+
+
+(def legal-value (limit-checker 5 10))
+
+(legal-value 1)
+;;=> false
+
+(legal-value 7)
+;;=> true
+
+(legal-value 10)
+;;=> true
+
+(legal-value 11)
+;;=> false
 
 ;;
 ;; #### Recursion
