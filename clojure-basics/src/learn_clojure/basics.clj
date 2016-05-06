@@ -1151,11 +1151,92 @@ user
 (inc 10)
 ;;=> 11
 
+
 ;;
-;; #### Function multi-arity
+;; In the following example we see how to create
+;; functions with multiple parameters.
+;; Let's assume we have to create
+;; a function which create a corporate email
+;; address for its employee. Oftentimes
+;; this type of email follow a very specific pattern
+;; In this case we will take the first letter of
+;; the name followed by the lastname then `@` the company
+;; domain.
+;;
+
+(defn email-address [firstname lastname domain]
+  (clojure.string/lower-case (str (first firstname) lastname "@" domain)))
+
+(email-address "John" "Smith" "acme.org")
+;;=> "jsmith@acme.org"
+
+(email-address "Walter" "White" "breakingbad.org")
+;;=> "wwhite@breakingbad.org"
+
+;;
+;; #### Function with multi-arities
 ;;
 ;; So far we seen how to create functions with
-;; only one parameter.
+;; which accept a fix number of parameters.
+;; In Clojure is possible to create functions
+;; which accept different set of 'arities'.
+;;
+
+(defn simple-greet
+  ([]
+   (simple-greet "World"))
+  ([name]
+   (str "Hello " name "!")))
+
+
+(simple-greet)
+;;=> "Hello World!"
+
+(simple-greet "Fred")
+;;=> "Hello Fred!"
+
+
+(defn greet
+  ([]
+   "Hey, Stranger!")
+  ([name]
+   (str "Hello " name))
+  ([firstname lastname]
+   (str "Hi, you must be: " lastname ", " firstname " " lastname))
+  ([title firstname lastname]
+   (str "Hello " title " " firstname " " lastname)))
+
+
+(greet)
+;;=> "Hey, Stranger!"
+
+(greet "James")
+;;=> "Hello James"
+
+(greet "James" "Bond")
+;;=> "Hi, you must be: Bond, James Bond"
+
+(greet "Dr" "John H." "Watson")
+;;=> "Hello Dr John H. Watson"
+
+
+;;
+;; It is also possible to create functions
+;; which have any number of parameters.
+;; these are called `variadic functions`.
+;;
+
+(defn de-dup [& names]
+  (seq (set names)))
+
+(de-dup "John" "Fred" "Lara" "John" "John" "Susan")
+;;=> ("Susan" "Fred" "John" "Lara")
+
+(defn short-name [firstname & names]
+  (str firstname " " (last names)))
+
+(short-name "Maria" "Teresa" "Jiulia" "Ramírez de Arroyo" "García")
+;;=> "Maria García"
 
 ;;
 ;; #### High-order functions

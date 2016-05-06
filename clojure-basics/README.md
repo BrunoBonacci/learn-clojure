@@ -32,7 +32,7 @@ The following sections are described:
   * Functions
     * Purity
     * Function definition
-    * Function multi-arity
+    * Function with multi-arities
     * high-order functions
     * anonymous functions
     * lambdas
