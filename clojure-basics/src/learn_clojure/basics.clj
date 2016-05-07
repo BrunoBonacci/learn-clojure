@@ -1567,7 +1567,21 @@ user
 ;;
 ;; ### Destructuring
 ;;
-
+;; Destructuring is a simple, yet powerful feature
+;; of Clojure. There are several ways in which you
+;; can leverage destructuring to make your code
+;; cleaner, with less repetitions, and less
+;; bug-prone code.  Destructuring is a way to
+;; unpack a collection into values and bind them
+;; to locals.  It takes a bit of exercise to make
+;; the eye used to read destructuring forms, but
+;; once done, the code appears much cleaner.  I
+;; won't cover the destructuring here, however I
+;; wrote a detailed post about the topic which you
+;; can find here:
+;;
+;; [The complete guide to Clojure destructuring](http://blog.brunobonacci.com/2014/11/16/clojure-complete-guide-to-destructuring/)
+;;
 
 ;;
 ;; ### Flow control
