@@ -1560,8 +1560,151 @@ user
 
 ;;
 ;;
-;; ### Vars, scope and local bindings
+;; ### Vars, namespaces, scope and local bindings
 ;;
+;; When defining a var using `def` or `defn`
+;; followed by symbol, the symbol is created
+;; in the local namespace.
+;; When starting the REPL in a empty project
+;; the default namespace is called `user`
+;; so unless you configure differently
+;; all your vars will be created there.
+;;
+;; Namespaces are like containers in which
+;; vars live in, but namespaces,
+;; once defined are **globally accessible**.
+;; As consequence when you define a var
+;; using `def` or `defn` these will be accessible
+;; globally.
+;;
+;; We will use `ns` which create a namespace if not present
+;; and switch to it, and `in-ns` just changes the current namespace.
+;; we will see how to loads namespaces we need with our processing
+;; with `require` and how vars are globally accessible.
+
+
+(ns user.test.one)
+
+(def my-name "john")
+
+my-name
+;;=> "john"
+
+(ns user.test.two)
+
+(def my-name "julie")
+
+my-name
+;;=> "julie"
+
+user.test.one/my-name
+;;=> "john"
+
+user.test.two/my-name
+;;=> "julie"
+
+(in-ns 'user.test.one)
+;;=> #namespace[user.test.one]
+
+my-name
+;;=> "john"
+
+(ns user.test.one)
+
+(def my-name (clojure.string/upper-case "john"))
+
+my-name
+;;=> "JOHN"
+
+(ns user.test.one
+  (:require [clojure.string :as s]))
+
+(def my-name (s/upper-case "john"))
+
+
+(ns user.test.one
+  (:require [clojure.string :refer [upper-case]]))
+
+(def my-name (upper-case "john"))
+
+my-name
+;;=> "JOHN"
+
+(ns user.test.one
+  (:require [clojure.string :refer [upper-case]])
+  (:require [user.test.two :as two]))
+
+(def my-name (upper-case two/my-name))
+
+my-name
+;;=> "JULIE"
+
+;;
+;; The global accessible vars (globals) is one
+;; level of scoping. If you don't want to have
+;; globally accessible vars then you have to
+;; use local bindings.
+;;
+;; We already had a glimpse of these while
+;; defining functions. In fact parameters
+;; are only visible inside the function:
+;;
+
+(defn sum
+  [v1 v2]
+  (+ v1 v2))
+
+;; In this example `v1` and `v2` are only accessible
+;; inside the function. Outside might be undefined
+;; or have a different value:
+
+
+(def v1 "hello")
+(def v2 "world")
+
+(sum 10 25)
+;;=> 35
+
+v1
+;;=> "hello"
+
+v2
+;;=> "world"
+
+;;
+;; There is another way to create local binding which are valid
+;; only inside the s-expr block, using `let`.
+;; With the let form you can create local variable which
+;; are visible only inside the block.
+
+(let [v1 23
+      v2 45]
+  ;; inside this block v1 v2 have the values 23 and 45
+  (+ v1 v2))
+;;=> 68
+
+;;
+;; outside the block v1 and v2 are resolved in the
+;; parent scope which in this case is the
+;; namespace/global You can even nest `let`
+;; bindings and use them inside functions.
+;; Here we use `println` to print to the standard output
+;; a message
+
+(let [v1 "this is a local value"] ;; outer block
+  (println "outer-v1:" v1)
+
+  (let [v1 1] ;; inner block
+    (println "inner-v1:" v1))
+
+  (println "after-v1:" v1))
+
+(println "global-v1:" v1)  ;; gloabl
+
+;;=> outer-v1: this is a local value
+;;=> inner-v1: 1
+;;=> after-v1: this is a local value
+;;=> global-v1: hello
 
 
 ;;
