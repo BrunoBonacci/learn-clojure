@@ -41,6 +41,7 @@ The following sections are described:
   * Destructuring
   * Flow control
     * if
+    * not, and, or
     * when
     * cond
     * case
@@ -56,3 +57,4 @@ The following sections are described:
   * Operations with files
     * slurp
     * spit
+  * Error handling
