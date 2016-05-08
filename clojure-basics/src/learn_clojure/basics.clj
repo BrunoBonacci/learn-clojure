@@ -62,6 +62,7 @@
 ;;     tolower(*c);
 ;;     // C - Whole string
 ;;     for ( ; *c; ++c) *c = tolower(*c);
+;;                          ^^^^^^^^^^^^^
 ;;
 ;;     ;; Clojure
 ;;     (lower-case "Hello World!")
@@ -1699,7 +1700,7 @@ v2
 
   (println "after-v1:" v1))
 
-(println "global-v1:" v1)  ;; gloabl
+(println "global-v1:" v1)  ;; global
 
 ;;=> outer-v1: this is a local value
 ;;=> inner-v1: 1
@@ -1729,7 +1730,117 @@ v2
 ;;
 ;; ### Flow control
 ;;
+;; We briefly introduced `if` for flow control,
+;; which is the basic form on top of which all the
+;; others are based upon.  Moreover there are more
+;; option for flow control in Clojure e we will
+;; see `if`,`not`, `and`, `or`, `if-not`, `when`,
+;; `when-not`, `cond` and `case`.
+;;
+;;
+;;     (if condition
+;;         then
+;;         else)
+;;
+;; the `condition` doesn't have to be a boolean
+;; expression necessarily as, in Clojure, anything
+;; is considered to be `true` except `false` and `nil`
+;; As you would expect if the `condition` is evaluated
+;; to be true the `then` expression is evaluated,
+;; otherwise the `else` expression is evaluated.
+;; The overall result will be determined by the
+;; result of the expression which is evaluated.
+;;
 
+(if (= 1 1)
+  "this is true"
+  "this is false")
+;;=> "this is true"
+
+(if (not (= 1 1))
+  "this is true"
+  "this is false")
+;;=> "this is false"
+
+;;
+;; Some times you don't have `else` clause,
+;; so you can omit it.
+
+(if (not= 1 0)
+  (println "that's odd"))
+;;=> that's odd
+;;=> nil
+
+;;
+;; when you have `if` and `not` together you can
+;; combine them in `if-not`
+
+(if-not (= 1 0)
+  (println "that's odd"))
+
+;; But when there is no else expression
+;; a more idiomatic way to write it in Clojure
+;; would be to use the form `when`, and similarly
+;; when you have a negation in your condition
+;; you can use `when-not`.
+
+(when (not= 1 0)
+  (println "that's odd"))
+
+(when-not (= 1 0)
+  (println "that's odd"))
+
+;;
+;; `when` accepts more than one expression
+;; and the result of the overall expression
+;; is the result of last form, or `nil`
+;; if the condition is false.
+
+(when true
+  1
+  2
+  3
+  4)
+;;=> 4
+
+;;
+;; However `if` accepts one form for the then, and
+;; another form for the `else` when given. If you
+;; have to invoke several functions perhaps with
+;; side-effect, then you have to use the `do`
+;; form.
+
+(do
+  1
+  2
+  3
+  4)
+;;=> 4
+
+
+(if true
+  (do
+    (println "this is executed when true")
+    (println "this one too.")
+    (println "the next line is the value returned")
+    :ok)
+  (do
+    (println "this is executed in the else")
+    :this-is-else))
+;;=> this is executed when true
+;;=> this one too.
+;;=> the next line is the value returned
+;;=> :ok
+
+
+;;
+;; If you have to check the equality to many
+;; different values you can use the `case`
+;; which is similar to `switch/case` of many
+;; languages.
+;;
+
+(case )
 
 ;;
 ;; ### Core functions
@@ -1743,5 +1854,5 @@ v2
 
 
 ;;
-;;
+;; ### Error handling
 ;;
