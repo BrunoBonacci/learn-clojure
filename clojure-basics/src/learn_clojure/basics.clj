@@ -1949,17 +1949,39 @@ v2
 (connection-url {} "/users")
 ;;=> "http://localhost:8080/users"
 
+;;
+;; Obviously you can combine `and`, `or` and `not`
+;; to create arbitrary complex conditions.
+;;
 
 ;;
 ;; ### Core functions
 ;;
-
+;;
 
 ;;
 ;; ### Operation with files
 ;;
+;; To open, read, write files
+;; there are wrappers from the java
+;; machinery for files. However
+;; here we will only see how to read
+;; and write text files which are
+;; small enough to fit in memory.
+;;
+;; To write some text in a file
+;; you can use the function `spit`,
+;; while to read the content of a file
+;; as a string you can use `slurp`.
+;;
+
+(spit "/tmp/my-file.txt"
+      "This is the content.\n")
+;;=> nil
 
 
+(slurp "/tmp/my-file.txt")
+;;=> "This is the content.\n"
 
 ;;
 ;; ### Error handling
