@@ -1837,10 +1837,59 @@ v2
 ;; If you have to check the equality to many
 ;; different values you can use the `case`
 ;; which is similar to `switch/case` of many
-;; languages.
+;; languages. In Clojure it looks like this:
+;;
+;;     (case value
+;;        val1  expr1
+;;        val2  expr2
+;;        val3  expr3
+;;        default-exp)
 ;;
 
-(case )
+(let [order-status :completed]
+  (case order-status
+    :new         "We have received your order, thanks."
+    :processing  "We are processing your order"
+    :ready       "We are processing your order"
+    :shipped     "Your order is on it's way"
+    :completed   "This order has been already delivered"
+    "This order is not found"))
+;;=> "This order has been already delivered"
+
+;;
+;; If you have multiple value with the same
+;; expression you can group them in a list.
+;;
+
+(let [order-status :ready]
+  (case order-status
+    :new         "We have received your order, thanks."
+    (:processing :ready)   "We are processing your order"
+    :shipped     "Your order is on it's way"
+    :completed   "This order has been already delivered"
+    "This order is not found"))
+;;=> "We are processing your order"
+
+
+;;
+;; Another very popular conditional form is
+;; `cond`, this is used in place of their
+;; `if/else-if/else-if/else` of other languages.
+;;
+;;     (cond
+;;        condition1 expr1
+;;        condition2 expr2
+;;        condition3 expr3
+;;        :else default-expr)
+;;
+
+(let [age 21]
+  (cond
+    (< age 16) "You are too young to drive"
+    (<= 16 age 18) "You can start your driving lessons"
+    (>= 100 age 18) "You can drive only if you have got a license"
+    :else "Maybe you should let someone else driving."))
+;;=> "You can drive only if you have got a license"
 
 ;;
 ;; ### Core functions
