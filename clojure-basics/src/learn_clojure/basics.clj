@@ -1891,6 +1891,65 @@ v2
     :else "Maybe you should let someone else driving."))
 ;;=> "You can drive only if you have got a license"
 
+
+;;
+;; If you have complicated conditions you might
+;; have to combine condition logically with `and`,
+;; `or` and `not`. We already see `not` which
+;; negates the given condition, while `and` and
+;; `or` they work as you would expect.
+;;
+;;    (and
+;;      condition1
+;;      condition2
+;;      condition3)
+;;
+;; the value of the entire expression is the value
+;; of the last condition. If a condition is found
+;; to be falsey (`false` or `nil`) the
+;; evaluation is interrupted and the whole expression
+;; will have the value of last evaluated expression.
+;;
+
+(and true true true)
+;;=> true
+
+(and 1 2 3 4)
+;;=> 4
+
+(and 1 2 nil 4 5)
+;;=> nil
+
+;;
+;; Similarly `or` accepts multiple conditions,
+;; and they are evaluated in the given order,
+;; and the first condition which is found to
+;; be true it will give stop the evaluation
+;; and return its value as the value of the
+;; the whole expression.
+
+(or false false nil true)
+;;=> true
+
+(or false 1 nil 3)
+;;=> 1
+
+;;
+;; `or` it is often used for provide default
+;; values to parameters function via destructuring
+;; however it can be used in normal code as well.
+;;
+
+(defn connection-url [config-map resource]
+  (let [protocol (or (:protocol config-map) "http")
+        hostname (or (:hostname config-map) "localhost")
+        port     (or (:port     config-map) 8080)]
+    (str protocol "://" hostname ":" port resource )))
+
+(connection-url {} "/users")
+;;=> "http://localhost:8080/users"
+
+
 ;;
 ;; ### Core functions
 ;;
