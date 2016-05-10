@@ -1976,13 +1976,58 @@ v2
 ;;
 
 (spit "/tmp/my-file.txt"
-      "This is the content.\n")
+      "This is the content")
 ;;=> nil
 
 
 (slurp "/tmp/my-file.txt")
-;;=> "This is the content.\n"
+;;=> "This is the content."
 
 ;;
 ;; ### Error handling
+;;
+;; What happens if the file you trying to read
+;; doesn't exists? or the device you trying to
+;; write to is full? The underlying Java APIs
+;; will throw an exception.
+;; Clojure provide access to the java machinery
+;; for error handling and you can use
+;; `try`, `catch`, `finally` and `throw` with the
+;; same semantic as the Java's ones.
+;;
+;; You have to surround the code which might throw
+;; exception using a `try` form, then you can
+;; handle the errors by their native type with a
+;; `catch` block.  Finally is a block that gets
+;; executed no matter what happen in the block and
+;; whether or not an exception is raised.  `throw`
+;; is to throw an exception from your own code.
+
+(slurp "/this_doesnt_exists.txt")
+;;=> FileNotFoundException /this_doesnt_exists.txt (No such file or directory)
+
+
+(try
+  (slurp "/this_doesnt_exists.txt")
+  (catch Exception x
+    (println "unable to read file.")
+    ""))
+;;=> ""
+
+
+;;
+;; ### Macros
+;;
+;; The macros are function which are executed at compile time
+;; by the compiler. The take code as input, and the output
+;; is still code. The code is expressed in the same stuff
+;; you have seen so far: lists, symbols, keywords, vectors, maps
+;; strings etc and from a user point of view they look just
+;; like normal Clojure functions (almost).
+;; It is a great way to extends the language to meet your
+;; domain needs. However I think this is a topic for
+;; a more advanced course. If you want to learn the basics
+;; of the macro you can read the following blog post:
+;;
+;; [A "dead simple" introduction to Clojure macros.](http://blog.brunobonacci.com/2015/04/19/dead-simple-introduction-to-clojure-macros/)
 ;;

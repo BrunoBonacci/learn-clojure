@@ -38,7 +38,7 @@ The following sections are described:
     * Closures
     * recursion
   * Vars, namespaces, scope, and local bindings
-  * Destructuring
+  * Destructuring (blog post)
   * Flow control
     * if
     * not, and, or
@@ -58,3 +58,4 @@ The following sections are described:
     * slurp
     * spit
   * Error handling
+  * Macros (blog post)
