@@ -1559,6 +1559,12 @@ user
 ;;=> "Elapsed time: 1.145227 msecs"
 ;;=> 70330367711422815821835254877183549770181269836358732742604905087154537118196933579742249494562611733487750449241765991088186363265450223647106012053374121273867339111198139373125598767690091902245245323403501N
 
+
+;;
+;; #### Function composition
+;;
+;; TODO: Function composition
+
 ;;
 ;;
 ;; ### Vars, namespaces, scope and local bindings
@@ -1957,22 +1963,175 @@ v2
 ;;
 ;; ### Core functions
 ;;
+;; The core has hundreds of functions defined
+;; which they all work on the basic data structures
+;; we seen so far. You can find the full list
+;; in the [Clojure cheatsheet](http://clojure.org/api/cheatsheet)
 ;;
+;;
+;; #### `apply`
+;;
+;; For the purpose of this course we will
+;; see only a few starting with `apply`.
+;; As the same suggest it "applies" a function
+;; to a given list of arguments.
+;;
+;;      (apply f args)
+;;      (apply f x args)
+;;
+
+(def words ["Hello" " " "world!"])
+
+(str ["Hello" " " "world!"])
+;;=> "[\"Hello\" \" \" \"world!\"]"
+
+(apply str ["Hello" " " "world!"])
+;;=> "Hello world!"
+
+(apply str "first-argument: " ["Hello" " " "world!"])
+;;=> "first-argument: Hello world!"
+
+;;
+;; #### `map`
+;;
+;; Next we will see one of the most used functions
+;; in the core `map` which has nothing to do with
+;; the associative maps (data structures) we seen
+;; before.  `map` come from the set theory and is
+;; a function which takes a function and a
+;; sequence of values and applies the function to
+;; all values in the sequence. It returns a
+;; lazy-sequence which means that the function
+;; application is performed when calling `map`,
+;; but it will be performed when the result will
+;; be consumed.
+;;
+;;      (map f coll)
+;;
+
+(map clojure.string/upper-case
+     ["Hello" "world!"])
+;;=> ("HELLO" "WORLD!")
+
+;;
+;; #### `mapcat`
+;;
+;; Sometime the application of the function `f`
+;; return a list of things like in the following
+;; example were we are splitting into words the
+;; following sentences.
+;;
+
+(map #(clojure.string/split % #"\W+")
+     ["Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      "Duis vel ante est."
+      "Pellentesque habitant morbi tristique"
+      "senectus et netus et malesuada fames ac turpis egestas."])
+
+;;=> (["Lorem" "ipsum" "dolor" "sit" "amet" "consectetur" "adipiscing" "elit"] ["Duis" "vel" "ante" "est"] ["Pellentesque" "habitant" "morbi" "tristique"] ["senectus" "et" "netus" "et" "malesuada" "fames" "ac" "turpis" "egestas"])
+
+;; application of the split function to a single sentence
+;; produces a list of words. Consequently the application
+;; of the function to all sentences produces a list of lists.
+;; If we rather have a single list with all the words
+;; we then need to concatenate all the sub-lists into one.
+;; To do so Clojure core has the `concat` function which
+;; just concatenates multiple lists into one.
+
+(concat [0 1 2 3] [:a :b :c] '(d e f))
+;;=> (0 1 2 3 :a :b :c d e f)
+
+;; To obtain a single list of all words we just need
+;; to apply the `concat` function to the `map` result.
+
+(apply concat
+       (map #(clojure.string/split % #"\W+")
+            ["Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+             "Duis vel ante est."
+             "Pellentesque habitant morbi tristique"
+             "senectus et netus et malesuada fames ac turpis egestas."]))
+;;=> ("Lorem" "ipsum" "dolor" "sit" "amet" "consectetur" "adipiscing" "elit" "Duis" "vel" "ante" "est" "Pellentesque" "habitant" "morbi" "tristique" "senectus" "et" "netus" "et" "malesuada" "fames" "ac" "turpis" "egestas")
+
+;;
+;; This construct if common enough that Clojure has
+;; a core function that does just this called `mapcat`.
+
+(mapcat #(clojure.string/split % #"\W+")
+        ["Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+         "Duis vel ante est."
+         "Pellentesque habitant morbi tristique"
+         "senectus et netus et malesuada fames ac turpis egestas."])
+;;=> ("Lorem" "ipsum" "dolor" "sit" "amet" "consectetur" "adipiscing" "elit" "Duis" "vel" "ante" "est" "Pellentesque" "habitant" "morbi" "tristique" "senectus" "et" "netus" "et" "malesuada" "fames" "ac" "turpis" "egestas")
+
+;;
+;;
+;; #### `reduce`
+;;
+;; Hadoop uses the two concept of `map` and
+;; `reduce` to perform arbitrary computation on
+;; large data.  Clojure has `reduce` as core
+;; function as well.  While `map` is applied
+;; one-by-one to all arguments with the objective
+;; of performing a transformation `reduce` seeks
+;; to summarize many values into one.  For example
+;; if you want to find the total sum of a list of
+;; values you can use reduce in the following way.
+;;
+;;      (reduce f coll)
+;;
+;; It can be used with many core functions
+;; like the arithmetic functions `+`, `*`
+;; but also with functions like `max` and `min`
+;; which respectively return the highest and
+;; the lowest value passed. But they
+;; can be used with your own functions too.
+;;
+
+(reduce + [10 15 23 32 43 54 12 11])
+;;=> 200
+
+(reduce * [10 15 23 32 43 54 12 11])
+;;=> 33838041600
+
+(reduce max [10 15 23 32 43 54 12 11])
+;;=> 54
+
+(reduce str ["Hello" " " "world!"])
+;;=> "Hello world!"
+
+
+;;
+;; #### `filter`
+;;
+
+;;
+;; #### `sort`
+;;
+
+;;
+;; #### `group-by`
+;;
+
+;;
+;; #### `partition`
+;;
+
+;;
+;; #### `into`
+;;
+
 
 ;;
 ;; ### Operation with files
 ;;
-;; To open, read, write files
-;; there are wrappers from the java
-;; machinery for files. However
-;; here we will only see how to read
-;; and write text files which are
-;; small enough to fit in memory.
+;; To open, read, write files there are wrappers
+;; from the java machinery for files. However here
+;; we will only see how to read and write text
+;; files which are small enough to fit in memory.
 ;;
-;; To write some text in a file
-;; you can use the function `spit`,
-;; while to read the content of a file
-;; as a string you can use `slurp`.
+;; To write some text in a file you can use the
+;; function `spit`, while to read the content of a
+;; file as a string you can use `slurp`.
 ;;
 
 (spit "/tmp/my-file.txt"
@@ -1988,12 +2147,11 @@ v2
 ;;
 ;; What happens if the file you trying to read
 ;; doesn't exists? or the device you trying to
-;; write to is full? The underlying Java APIs
-;; will throw an exception.
-;; Clojure provide access to the java machinery
-;; for error handling and you can use
-;; `try`, `catch`, `finally` and `throw` with the
-;; same semantic as the Java's ones.
+;; write to is full? The underlying Java APIs will
+;; throw an exception.  Clojure provide access to
+;; the java machinery for error handling and you
+;; can use `try`, `catch`, `finally` and `throw`
+;; with the same semantic as the Java's ones.
 ;;
 ;; You have to surround the code which might throw
 ;; exception using a `try` form, then you can
@@ -2014,20 +2172,30 @@ v2
     ""))
 ;;=> ""
 
+;;
+;; __Oftentimes while working with network
+;; requests, you might want to retry a given
+;; request a number of times before giving up. In
+;; such cases there is a library called
+;; [safely](https://github.com/BrunoBonacci/safely)
+;; which might be handy.__
+;;
 
 ;;
 ;; ### Macros
 ;;
-;; The macros are function which are executed at compile time
-;; by the compiler. The take code as input, and the output
-;; is still code. The code is expressed in the same stuff
-;; you have seen so far: lists, symbols, keywords, vectors, maps
-;; strings etc and from a user point of view they look just
-;; like normal Clojure functions (almost).
-;; It is a great way to extends the language to meet your
-;; domain needs. However I think this is a topic for
-;; a more advanced course. If you want to learn the basics
-;; of the macro you can read the following blog post:
+;; The macros are function which are executed at
+;; compile time by the compiler. The take code as
+;; input, and the output is still code. The code
+;; is expressed in the same stuff you have seen so
+;; far: lists, symbols, keywords, vectors, maps
+;; strings etc and from a user point of view they
+;; look just like normal Clojure functions
+;; (almost).  It is a great way to extends the
+;; language to meet your domain needs. However I
+;; think this is a topic for a more advanced
+;; course. If you want to learn the basics of the
+;; macro you can read the following blog post:
 ;;
 ;; [A "dead simple" introduction to Clojure macros.](http://blog.brunobonacci.com/2015/04/19/dead-simple-introduction-to-clojure-macros/)
 ;;

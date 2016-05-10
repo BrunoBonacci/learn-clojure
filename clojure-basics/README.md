@@ -36,7 +36,8 @@ The following sections are described:
     * high-order functions
     * Anonymous functions or lambda functions
     * Closures
-    * recursion
+    * Recursion
+    * Function composition
   * Vars, namespaces, scope, and local bindings
   * Destructuring (blog post)
   * Flow control
@@ -46,12 +47,12 @@ The following sections are described:
     * cond
     * case
   * Core functions
-    * map
     * apply
+    * map
     * reduce
     * filter
-    * group-by
     * sort
+    * group-by
     * partition
     * into
   * Operations with files
