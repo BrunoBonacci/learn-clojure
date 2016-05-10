@@ -58,11 +58,12 @@
 ;; is only one `;`.
 ;;
 ;; You can skip the evaluation and execution of a
-;; block with the `comment`, however this isn't a
-;; complete comment in the same way as the
+;; block with the `comment` form, however this
+;; isn't a complete comment in the same way as the
 ;; semicolon, as it still get parsed by the reader
-;; in the same way as the rest of the code.
-;; For example:
+;; in the same way as the rest of the
+;; code. Therefore the comment block has to be
+;; valid Clojure code.  For example:
 ;;
 ;;      ;; this is a valid comment
 ;;      ;; a : b : c
@@ -1140,11 +1141,13 @@ user
 ;; which increments the input parameters by 1 you
 ;; will write something as follow:
 ;;
-;;     /- fn, special form
-;;    /  parameter vector, 1 param called `n`
-;;    |  |  body -> expression to evaluate when
-;;    |  |  |       this function is called
-;;   (fn [n] (+ n 1))
+;; ```
+;;   /- fn, special form
+;;  /  parameter vector, 1 param called `n`
+;;  |  |  body -> expression to evaluate when
+;;  |  |  |       this function is called
+;; (fn [n] (+ n 1))
+;; ```
 ;;
 ;; This is the simplest way to define a function.
 ;;
@@ -1895,11 +1898,9 @@ v2
 ;; once done, the code appears much cleaner.  I
 ;; won't cover the destructuring here, however I
 ;; wrote a detailed post about the topic which you
-;; can find here:
+;; can find here: [The complete guide to Clojure
+;; destructuring](http://blog.brunobonacci.com/2014/11/16/clojure-complete-guide-to-destructuring/)
 ;;
-;; [The complete guide to Clojure destructuring](http://blog.brunobonacci.com/2014/11/16/clojure-complete-guide-to-destructuring/)
-;;
-
 ;;
 ;; ### Flow control
 ;;
@@ -2072,10 +2073,10 @@ v2
 ;; negates the given condition, while `and` and
 ;; `or` they work as you would expect.
 ;;
-;;    (and
-;;      condition1
-;;      condition2
-;;      condition3)
+;;     (and
+;;       condition1
+;;       condition2
+;;       condition3)
 ;;
 ;; the value of the entire expression is the value
 ;; of the last condition. If a condition is found
@@ -2126,7 +2127,6 @@ v2
 ;; Obviously you can combine `and`, `or` and `not`
 ;; to create arbitrary complex conditions.
 ;;
-
 ;;
 ;; ### Core functions
 ;;
@@ -2136,7 +2136,7 @@ v2
 ;; in the [Clojure cheatsheet](http://clojure.org/api/cheatsheet)
 ;;
 ;;
-;; #### `apply`
+;; #### The function: `apply`
 ;;
 ;; For the purpose of this course we will
 ;; see only a few starting with `apply`.
@@ -2159,7 +2159,7 @@ v2
 ;;=> "first-argument: Hello world!"
 
 ;;
-;; #### `map`
+;; #### The function: `map`
 ;;
 ;; Next we will see one of the most used functions
 ;; in the core `map` which has nothing to do with
@@ -2181,7 +2181,7 @@ v2
 ;;=> ("HELLO" "WORLD!")
 
 ;;
-;; #### `mapcat`
+;; #### The function: `mapcat`
 ;;
 ;; Sometime the application of the function `f`
 ;; return a list of things like in the following
@@ -2232,7 +2232,7 @@ v2
 
 ;;
 ;;
-;; #### `reduce`
+;; #### The function: `reduce`
 ;;
 ;; Hadoop uses the two concept of `map` and
 ;; `reduce` to perform arbitrary computation on
@@ -2268,7 +2268,7 @@ v2
 
 
 ;;
-;; #### `filter`
+;; #### The function: `filter`
 ;;
 ;; The next function in the core is `filter` which
 ;; takes a *predicate function* and a collection
@@ -2315,7 +2315,7 @@ v2
 ;;=> (0 2 4 6)
 
 ;;
-;; #### `sort`
+;; #### The function: `sort`
 ;;
 ;; `sort` as you would expect returns a sorted
 ;; sequence of the element in the given collection.
@@ -2349,9 +2349,8 @@ v2
 ;; function which is applied to the item before the
 ;; comparison.
 ;;
-
 ;;
-;; #### `group-by`
+;; #### The function: `group-by`
 ;;
 ;; Out of the box in Clojure you have a function
 ;; to perform grouping on your data.
@@ -2377,8 +2376,7 @@ v2
 ;;=> {1 [{:user-id 1, :uri "/"} {:user-id 1, :uri "/account"}], 2 [{:user-id 2, :uri "/foo"}]}
 
 ;;
-;;
-;; #### `frequencies`
+;; #### The function: `frequencies`
 ;;
 ;; When looking to count how frequent an item appears
 ;; in a collection for example to compute histograms
@@ -2392,9 +2390,9 @@ v2
 (frequencies [1 2 3 1 2 3 2 3 1 2 3 3 2 3 2 3 4 4])
 ;;=> {1 3, 2 6, 3 7, 4 2}
 
-
 ;;
-;; #### `partition`
+;;
+;; #### The function: `partition`
 ;;
 ;; Another interesting group of functions in the Clojure
 ;; core are `partition`, `partition-all`, `partition-by`.
@@ -2427,7 +2425,7 @@ v2
 ;;=> ((0 1 2) (5 6 7))
 
 ;;
-;; #### `into`
+;; #### The function: `into`
 ;;
 ;; `into` is used to create a new collection of a given
 ;; type with all items from another collection "into" it.
@@ -2510,14 +2508,14 @@ v2
 ;;=> ""
 
 ;;
-;; __Oftentimes while working with network
+;; _Oftentimes while working with network
 ;; requests, you might want to retry a given
 ;; request a number of times before giving up. In
 ;; such cases there is a library called
 ;; [safely](https://github.com/BrunoBonacci/safely)
-;; which might be handy.__
+;; which might be handy._
 ;;
-
+;;
 ;;
 ;; ### Macros
 ;;
