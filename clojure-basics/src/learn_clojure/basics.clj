@@ -504,12 +504,12 @@ java.lang.Long/MAX_VALUE
 ;; the head, `O(n)` traversal and element search.
 ;;
 
-; to create a list you can use the function `list`
+                                        ; to create a list you can use the function `list`
 (list 1 2 3 4 5)
 ;;=> (1 2 3 4 5)
 
-; to "add" an element on the front of the list you can
-; use the `cons` function.
+                                        ; to "add" an element on the front of the list you can
+                                        ; use the `cons` function.
 (cons 0 (list 1 2 3 4 5))
 ;;=> (0 1 2 3 4 5)
 
