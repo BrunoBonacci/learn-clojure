@@ -37,7 +37,7 @@ The following sections are described:
     * Anonymous functions or lambda functions
     * Closures
     * Recursion
-    * Function composition
+    * Function composition and partial functions
   * Vars, namespaces, scope, and local bindings
   * Destructuring (blog post)
   * Flow control

@@ -1561,9 +1561,124 @@ user
 
 
 ;;
-;; #### Function composition
+;; #### Function composition and partial functions
 ;;
-;; TODO: Function composition
+;; We seen earlier that we functions such as `first`,
+;; `second`, `last` and `rest` to access respectively
+;; the first item of the sequence, the second one,
+;; the last one and the tail of the sequence.
+;; If it happens that we are working with lots 5 items
+;; sequences we have the tools to get all but the third
+;; and the forth item. If you are doing a lot of them
+;; you'll probably extract into two functions as follow:
+
+(defn third
+  [coll]
+  (first (rest (rest coll))))
+
+(third '(1 2 3 4 5))
+;;=> 3
+
+(defn fourth
+  [coll]
+  (first (rest (rest (rest coll)))))
+
+(fourth '(1 2 3 4 5))
+;;=> 4
+
+;; But there is another way.
+;; If, like in this case, the output of a function
+;; gets passed directly into the next one
+;; as a simple pipeline of functions
+;; then you can just use the `comp` function.
+;;
+;;      (comp f1 f2 f3 ... fn)
+
+(def third (comp first rest rest))
+(def fourth (comp first rest rest rest))
+
+(third '(1 2 3 4 5))
+;;=> 3
+
+(fourth '(1 2 3 4 5))
+;;=> 4
+
+;; Let's see another example. Let's assume
+;; we have to write a function which given
+;; a number it doubles it and subtract 1
+;; from it. So we can use the `multiplier`
+;; function we wrote earlier to accomplish
+;; the first part and the Clojure core `dec`
+;; to decrement it by one and compose them
+;; together with `comp`.
+
+(defn multiplier [m]
+  (fn [n]
+    (* n m)))
+
+(def doubler (multiplier 2))
+(def almost-twice (comp dec doubler))
+
+(almost-twice 5)
+;;=> 9
+
+(almost-twice 9)
+;;=> 17
+
+;;
+;; Now let's say we want to create a function which
+;; given a number perform `almost-twice` two times.
+;;
+
+(def almost-twice-twice (comp almost-twice almost-twice))
+
+(almost-twice-twice 5)
+;;=> 17
+
+(almost-twice-twice 10)
+;;=> 37
+
+;; Another way we could have wrote the `doubler`
+;; function is by using the partial application
+;; of the function `*`. In Clojure this
+;; is achieved via the function `partial`.
+;;
+;;      (partial f arg1 ... argn)
+;;
+
+(def doubler (partial * 2))
+
+(doubler 5)
+;;=> 10
+
+;; what happens here is that the `partial`
+;; function return a function which
+;; calls `*` with the parameters of the partial
+;; and the parameter of the final call all in one call.
+;;
+;; Another nice example is using the function `format`
+;; which takes a format-string and a bunch of arguments
+;; and formats the string accordingly. This is very similar
+;; to the C `printf` function however Clojure uses the
+;; Java `String.format` implementation.
+;; So we can use this to produce a string which contains
+;; a zero-padded formatted version of the given number.
+;;
+
+(def pad0 (partial format "%013d"))
+
+(pad0 43)
+;;=> "0000000000043"
+
+(pad0 2346765847)
+;;=> "0002346765847"
+
+
+(def item-location (partial format "Section: %d, Row %d, Shelve: %s"))
+
+(item-location 3 12 "F")
+;;=> "Section: 3, Row 12, Shelve: F"
+
 
 ;;
 ;;
