@@ -2103,14 +2103,127 @@ v2
 ;;
 ;; #### `filter`
 ;;
+;; The next function in the core is `filter` which
+;; takes a *predicate function* and a collection
+;; and returns a lazy-sequence of the items in the
+;; collection for which the application of the
+;; function returns a "thruthy" value.  Predicate
+;; functions are functions which takes one
+;; parameter and return a logical true or false.
+;;
+;;      (filter pred? coll)
+;;
+;; For example:
+
+(filter odd? [0 1 2 3 4 5 6 7])
+;;=> (1 3 5 7)
+
+(filter #(> (count %) 5)
+        ["Lorem" "ipsum" "dolor" "sit" "amet" "consectetur" "adipiscing"])
+;;=> ("consectetur" "adipiscing")
+
+;;
+;; `identity` is a function which given a value
+;; it just return the value.
+;; This is often used when a function transformation
+;; is required as parameter, but no transformation is wanted.
+;; another idiomatic use of it is to remove nil and false
+;; from a collection.
+;;
+
+(filter identity
+        ["Lorem" "ipsum" nil "sit" nil "consectetur" nil])
+;;=> ("Lorem" "ipsum" "sit" "consectetur")
+
+;;
+;; The function `remove` is the dual of `filter`
+;; in the sense that is will remove the items
+;; for which the predicate function returns true.
+;;
+
+(filter odd? [0 1 2 3 4 5 6 7])
+;;=> (1 3 5 7)
+
+(remove odd? [0 1 2 3 4 5 6 7])
+;;=> (0 2 4 6)
 
 ;;
 ;; #### `sort`
+;;
+;; `sort` as you would expect returns a sorted
+;; sequence of the element in the given collection.
+;;
+;;      (sort coll)
+;;      (sort comp coll)
+;;
+
+(sort [8 3 5 2 5 7 9 4 3 1 0])
+;;=> (0 1 2 3 3 4 5 5 7 8 9)
+
+(sort > [8 3 5 2 5 7 9 4 3 1 0])
+;;=> (9 8 7 5 5 4 3 3 2 1 0)
+
+(sort-by count
+         ["Lorem" "ipsum" "dolor" "sit" "amet" "consectetur" "adipiscing"])
+;;=> ("sit" "amet" "Lorem" "ipsum" "dolor" "adipiscing" "consectetur")
+
+(sort-by count >
+         ["Lorem" "ipsum" "dolor" "sit" "amet" "consectetur" "adipiscing"])
+;;=> ("consectetur" "adipiscing" "Lorem" "ipsum" "dolor" "amet" "sit")
+
+(sort-by :score >
+         [{:user "john1" :score 345}
+          {:user "fred3" :score 75}
+          {:user "sam2"  :score 291}])
+;;=> ({:user "john1", :score 345} {:user "sam2", :score 291} {:user "fred3", :score 75})
+
+;;
+;; A similar function is `sort-by` which accepts a
+;; function which is applied to the item before the
+;; comparison.
 ;;
 
 ;;
 ;; #### `group-by`
 ;;
+;; Out of the box in Clojure you have a function
+;; to perform grouping on your data.
+;; `group-by` accepts a function and a collection
+;; and it will apply the given function
+;; to all items in the collections and groups
+;; those which have the same result into
+;; the same key. It returns a map where
+;; the key is the group-value, and
+;; the value of the map is a list of items
+;; which belong to that group.
+
+(group-by odd? (range 10))
+;;=> {false [0 2 4 6 8], true [1 3 5 7 9]}
+
+
+(group-by count ["Lorem" "ipsum" "dolor" "sit" "amet" "consectetur" "adipiscing"])
+;;=> {5 ["Lorem" "ipsum" "dolor"], 3 ["sit"], 4 ["amet"], 11 ["consectetur"], 10 ["adipiscing"]}
+
+(group-by :user-id [{:user-id 1 :uri "/"}
+                    {:user-id 2 :uri "/foo"}
+                    {:user-id 1 :uri "/account"}])
+;;=> {1 [{:user-id 1, :uri "/"} {:user-id 1, :uri "/account"}], 2 [{:user-id 2, :uri "/foo"}]}
+
+;;
+;;
+;; #### `frequencies`
+;;
+;; When looking to count how frequent an item appears
+;; in a collection for example to compute histograms
+;; you can use the function called `frequencies`.
+;;
+
+(frequencies ["john" "fred" "alice" "fred" "jason" "john" "alice" "john"])
+;;=> {"john" 3, "fred" 2, "alice" 2, "jason" 1}
+
+(frequencies [1 2 3 1 2 3 2 3 1 2 3 3 2 3 2 3 4 4])
+;;=> {1 3, 2 6, 3 7, 4 2}
+
 
 ;;
 ;; #### `partition`

@@ -53,6 +53,7 @@ The following sections are described:
     * filter
     * sort
     * group-by
+    * frequencies
     * partition
     * into
   * Operations with files
