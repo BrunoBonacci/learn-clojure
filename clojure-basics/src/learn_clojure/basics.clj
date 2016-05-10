@@ -77,6 +77,13 @@
 ;; this case just tells the compiler to not
 ;; generate anything any code.
 ;;
+;; We will denote the output of the REPL evaluation
+;; with by prefixing the result with `;;=>`.
+;; So every time you see a Clojure expression
+;; followed by `;;=>` and a value it means
+;; that the value is the result of the evaluation
+;; of last expression.
+;;
 ;; ### The function call.
 ;;
 ;; The first concept I will introduce is how to
