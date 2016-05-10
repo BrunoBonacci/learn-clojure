@@ -2221,6 +2221,7 @@ v2
 (frequencies ["john" "fred" "alice" "fred" "jason" "john" "alice" "john"])
 ;;=> {"john" 3, "fred" 2, "alice" 2, "jason" 1}
 
+
 (frequencies [1 2 3 1 2 3 2 3 1 2 3 3 2 3 2 3 4 4])
 ;;=> {1 3, 2 6, 3 7, 4 2}
 
@@ -2228,10 +2229,66 @@ v2
 ;;
 ;; #### `partition`
 ;;
+;; Another interesting group of functions in the Clojure
+;; core are `partition`, `partition-all`, `partition-by`.
+;; Here we will see only the first two.
+;; `partition` chunks the given sequence into
+;; sub-sequences (lazy) of `n` items each.
+;;
+;;      (partition n coll)
+;;      (partition n step coll)
+;;
+
+(partition 3 (range 11))
+;;=> ((0 1 2) (3 4 5) (6 7 8))
+
+;; `partition-all` does the same, but it returns
+;; also chunks of which are incomplete.
+
+(partition-all 3 (range 11))
+;;=> ((0 1 2) (3 4 5) (6 7 8) (9 10))
+
+;;
+;; The `step` parameters tells the function
+;; how many item has to move forward after every chunk.
+;; if not give `step` is equal to `n`
+
+(partition 3 1 (range 11))
+;;=> ((0 1 2) (1 2 3) (2 3 4) (3 4 5) (4 5 6) (5 6 7) (6 7 8) (7 8 9) (8 9 10))
+
+(partition 3 5 (range 11))
+;;=> ((0 1 2) (5 6 7))
 
 ;;
 ;; #### `into`
 ;;
+;; `into` is used to create a new collection of a given
+;; type with all items from another collection "into" it.
+;; Items are conjoined using `conj`
+;; It is often used to change the type of a map,
+;; or to build a map out of key/value pairs.
+;;
+;;      (into dest source)
+;;
+
+(into [] '(0 1 2 3 4 5 6 7 8 9))
+;;=> [0 1 2 3 4 5 6 7 8 9]
+
+
+(into (sorted-map) {:b 2, :c 3, :a 1})
+;;=> {:a 1, :b 2, :c 3}
+
+(into {} [[:a 1] [:b 2] [:c 3]])
+;;=> {:a 1, :b 2, :c 3}
+
+(map (fn [e] [(first e) (inc (second e))])
+     {:a 1, :b 2, :c 3})
+;;=> ([:a 2] [:b 3] [:c 4])
+
+(into {}
+      (map (fn [e] [(first e) (inc (second e))])
+           {:a 1, :b 2, :c 3}))
+;;=> {:a 2, :b 3, :c 4}
 
 
 ;;
