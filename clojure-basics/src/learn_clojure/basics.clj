@@ -17,14 +17,66 @@
 ;;
 ;;
 ;; ### The REPL
-;; TODO:
+;;
+;; The REPL is (IMHO) one of the key Clojure's
+;; feature. REPL stands for: __Read Eval Print
+;; Loop__ and although is present in many
+;; languages such as python, ruby and soon Java as
+;; well, in Clojure is part of the main
+;; development workflow. In other words if you are
+;; not using the REPL for your Clojure development
+;; you are doing it wrong!
+;;
+;; The REPL allows you to connect to a running
+;; system, inspect runtime values, and even make
+;; live changes in your code without having to
+;; restart your system.
+;;
+;; It is the best way to explore a system or a
+;; dataset and get familiar with its domain.
+;;
+;; In terms of feedback loop is way better than
+;; the TDD at the point that is creating a new
+;; development methodology the **REPL Driven
+;; Development**
+;;
+;; For this session we are going to use the REPL
+;; to explore Clojure features, this might give a
+;; glimpse of what is possible to do with the
+;; Clojure REPL.
 ;;
 ;;
 ;; ### Clojure syntax
-;; TODO:
 ;;
+;; Clojure syntax is very simple.
+;; A program is composed of s-expressions,
+;; every s-expr is delimited by a set of
+;; parenthesis. Line comments are made
+;; with a semicolon (`;`) and by conventions
+;; a full line comment is two or more consecutive
+;; semicolons `;;` while and in-line comment
+;; is only one `;`.
 ;;
-;; ### and the function call.
+;; You can skip the evaluation and execution of a
+;; block with the `comment`, however this isn't a
+;; complete comment in the same way as the
+;; semicolon, as it still get parsed by the reader
+;; in the same way as the rest of the code.
+;; For example:
+;;
+;;      ;; this is a valid comment
+;;      ;; a : b : c
+;;      ;; while this won't be readable
+;;      (comment a : b : c)
+;;
+;; The difference is that the semicolon comment is
+;; ignored by the reader, while the `comment`
+;; block is something that you could have
+;; implemented yourself using the macros, which it
+;; this case just tells the compiler to not
+;; generate anything any code.
+;;
+;; ### The function call.
 ;;
 ;; The first concept I will introduce is how to
 ;; make a function call.  We will see more about
