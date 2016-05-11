@@ -36,7 +36,7 @@
 ;; dataset and get familiar with its domain.
 ;;
 ;; In terms of feedback, the Read Eval Print Loop
-;; is so much better that TDD, that a new
+;; is so much better than TDD, that a new
 ;; development methodology has been created/inspired..
 ;; the **REPL Driven Development**
 ;;
@@ -511,12 +511,14 @@ java.lang.Long/MAX_VALUE
 ;; the head, `O(n)` traversal and element search.
 ;;
 
-                                        ; to create a list you can use the function `list`
+;; to create a list you can use the function `list`
+
 (list 1 2 3 4 5)
 ;;=> (1 2 3 4 5)
 
-                                        ; to "add" an element on the front of the list you can
-                                        ; use the `cons` function.
+;; to "add" an element on the front of the list you can
+;; use the `cons` function.
+
 (cons 0 (list 1 2 3 4 5))
 ;;=> (0 1 2 3 4 5)
 
@@ -974,12 +976,13 @@ java.lang.Long/MAX_VALUE
 ;; different namesapce pointing to different
 ;; values.
 ;;
-;; In Clojure symbols start with a letter, and can contain
-;; letters, numbers, dashes, some punctuation marks and other
-;; characters. Basically anything which doesn't belong in the
-;; Clojure syntax (following characters aren't accepted in
-;; symbols name `@#,/.[]{}()`) anything else is a valid
-;; symbol.
+;; In Clojure symbols start with a letter, and can
+;; contain letters, numbers, dashes, some
+;; punctuation marks and other
+;; characters. Basically anything which doesn't
+;; belong in the Clojure syntax (following
+;; characters aren't accepted in symbols name
+;; `@#,/.[]{}()`) anything else is a valid symbol.
 ;;
 ;; You can create symbols by quoting a word with
 ;; the `quote` function or the single quote
@@ -1103,9 +1106,9 @@ user
 ;;
 ;; So far we have seen how to represent data in
 ;; our system, now we will see how to make sense
-;; of this data and how to extract/process/transform it.
-;; The way we express this in
-;; Clojure is via functions.
+;; of this data and how to
+;; extract/process/transform it.  The way we
+;; express this in Clojure is via functions.
 ;;
 ;;
 ;; #### Purity
@@ -1204,9 +1207,9 @@ user
 
 ;;
 ;; Since defining functions is very common, there
-;; is a shorthand to the idiom
-;; `(def funciton-name (fn [parameter list] (expression)))`
-;; via the `defn` form which just combines the `def` and
+;; is a shorthand to the idiom `(def funciton-name
+;; (fn [parameter list] (expression)))` via the
+;; `defn` form which just combines the `def` and
 ;; `fn` forms.  So we can redefine the previous
 ;; function in the following way:
 ;;
@@ -1241,14 +1244,13 @@ user
 
 ;;
 ;; In the following example we see how to create
-;; functions with multiple parameters.
-;; Let's assume we have to create
-;; a function which create a corporate email
-;; address for its employee. Oftentimes
-;; this type of email follows a very specific pattern
-;; In this case we will take the first letter of
-;; the name followed by the lastname then `@` the company
-;; domain.
+;; functions with multiple parameters.  Let's
+;; assume we have to create a function which
+;; create a corporate email address for its
+;; employee. Oftentimes this type of email follows
+;; a very specific pattern In this case we will
+;; take the first letter of the name followed by
+;; the lastname then `@` the company domain.
 ;;
 
 (defn email-address [firstname lastname domain]
@@ -1374,13 +1376,13 @@ user
 ;;
 ;; Oftentimes you want to create a function for a
 ;; specific task in a local context. Such
-;; functions don't have any reason to have a global
-;; name as they are meaningful only in that
+;; functions don't have any reason to have a
+;; global name as they are meaningful only in that
 ;; specific context, in this case you can create
 ;; anonymous functions (also called lambda
 ;; function) and Clojure has some support to make
-;; this easier.  We already seen an example of
-;; an anonymous function with our very first function
+;; this easier.  We already seen an example of an
+;; anonymous function with our very first function
 ;; example.
 ;;
 
@@ -1424,13 +1426,13 @@ user
 ;; parameters and values which are NOT in the
 ;; parameters list.
 ;;
-;; Like in our `multiplier` function example,
-;; the returned function is closing over the
-;; value `m` which is not in its parameter list
-;; but it is a parameter of the parent context
-;; the `multiplier` fn. While `n` is a normal parameter
-;; `m` is the value we are "closing over"
-;; providing a context for that function.
+;; Like in our `multiplier` function example, the
+;; returned function is closing over the value `m`
+;; which is not in its parameter list but it is a
+;; parameter of the parent context the
+;; `multiplier` fn. While `n` is a normal
+;; parameter `m` is the value we are "closing
+;; over" providing a context for that function.
 
 (defn multiplier [m]
   (fn [n]
@@ -1438,14 +1440,13 @@ user
 ;;=> #'learn-clojure.basics/multiplier
 
 ;;
-;; Let's see another example. Here
-;; we want to create a function which
-;; takes a number and return a logical value
-;; representing whether the number
-;; is between two limits (limits included).
+;; Let's see another example. Here we want to
+;; create a function which takes a number and
+;; return a logical value representing whether the
+;; number is between two limits (limits included).
 ;; For this purpose we can use the function `>=`
-;; which returns whether a number is greater or equal
-;; then the other one.
+;; which returns whether a number is greater or
+;; equal then the other one.
 ;;
 ;; Other similar functions are `>`, `<`, `<=`, `=` and `not=`.
 ;;
@@ -1656,14 +1657,16 @@ user
 ;;
 ;; #### Function composition and partial functions
 ;;
-;; We have seen earlier that there are functions such as `first`,
-;; `second`, `last` and `rest` to access respectively
-;; the first item of the sequence, the second item,
-;; the last item and the tail of the sequence.
-;; These functions can be combined to create other functions
-;; for accessing the third, fourth, fifth and other positional items.
-;; The following functions are an example of how to construct
-;; two such functions.
+;; We have seen earlier that there are functions
+;; such as `first`, `second`, `last` and `rest` to
+;; access respectively the first item of the
+;; sequence, the second item, the last item and
+;; the tail of the sequence.  These functions can
+;; be combined to create other functions for
+;; accessing the third, fourth, fifth and other
+;; positional items.  The following functions are
+;; an example of how to construct two such
+;; functions.
 
 (defn third
   [coll]
@@ -1679,11 +1682,11 @@ user
 (fourth '(1 2 3 4 5))
 ;;=> 4
 
-;; But there is another way.
-;; If, like in this case, the output of a function
-;; can be passed directly into the input of the next one
-;; as a simple pipeline of functions
-;; then you can just use the `comp` function.
+;; But there is another way.  If, like in this
+;; case, the output of a function can be passed
+;; directly into the input of the next one as a
+;; simple pipeline of functions then you can just
+;; use the `comp` function.
 ;;
 ;;      (comp f1 f2 f3 ... fn)
 
@@ -1719,8 +1722,9 @@ user
 ;;=> 17
 
 ;;
-;; Now let's say we want to create a function which
-;; given a number perform `almost-twice` two times.
+;; Now let's say we want to create a function
+;; which given a number perform `almost-twice` two
+;; times.
 ;;
 
 (def almost-twice-twice (comp almost-twice almost-twice))
@@ -1732,9 +1736,9 @@ user
 ;;=> 37
 
 ;; Another way we could have written the `doubler`
-;; function is by using the partial application
-;; of the function `*`. In Clojure this
-;; is achieved via the function `partial`.
+;; function is by using the partial application of
+;; the function `*`. In Clojure this is achieved
+;; via the function `partial`.
 ;;
 ;;      (partial f arg1 ... argn)
 ;;
@@ -1745,18 +1749,19 @@ user
 ;;=> 10
 
 ;; what happens here is that the `partial`
-;; function returns a function which
-;; calls `*` with the parameters of the partial
-;; and the parameter of the final call, all in one call.
+;; function returns a function which calls `*`
+;; with the parameters of the partial and the
+;; parameter of the final call, all in one call.
 ;;
-;; Another nice example is using the function `format`
-;; which takes a format-string and a bunch of arguments
-;; and formats the string accordingly. This is very similar
-;; to the C `printf` function however Clojure uses the
-;; Java `String.format` implementation.
-;; So we can use this to create a function that produces a
-;; string which contains a zero-padded formatted version of
-;; the given number.
+;; Another nice example is using the function
+;; `format` which takes a format-string and a
+;; bunch of arguments and formats the string
+;; accordingly. This is very similar to the C
+;; `printf` function however Clojure uses the Java
+;; `String.format` implementation.  So we can use
+;; this to create a function that produces a
+;; string which contains a zero-padded formatted
+;; version of the given number.
 
 (def pad0 (partial format "%013d"))
 
@@ -1792,10 +1797,12 @@ user
 ;; using `def` or `defn` these will be accessible
 ;; globally.
 ;;
-;; We will use `ns` which create a namespace if not present
-;; and switch to it, and `in-ns` just changes the current namespace.
-;; we will see how to loads namespaces we need with our processing
-;; with `require` and how vars are globally accessible.
+;; We will use `ns` which create a namespace if
+;; not present and switch to it, and `in-ns` just
+;; changes the current namespace.  we will see how
+;; to loads namespaces we need with our processing
+;; with `require` and how vars are globally
+;; accessible.
 
 
 (ns user.test.one)
@@ -1880,9 +1887,9 @@ my-name
   [v1 v2]
   (+ v1 v2))
 
-;; In this example `v1` and `v2` are only accessible
-;; inside the function. Outside might be undefined
-;; or have a different value:
+;; In this example `v1` and `v2` are only
+;; accessible inside the function. Outside might
+;; be undefined or have a different value:
 
 
 (def v1 "hello")
@@ -1898,10 +1905,11 @@ v2
 ;;=> "world"
 
 ;;
-;; There is another way to create local binding which are valid
-;; only inside the s-expr block, using `let`.
-;; With the let form you can create local variable which
-;; are visible only inside the block.
+;; There is another way to create local binding
+;; which are valid only inside the s-expr block,
+;; using `let`.  With the let form you can create
+;; local variable which are visible only inside
+;; the block.
 
 (let [v1 23
       v2 45]
@@ -1913,9 +1921,9 @@ v2
 ;; outside the block v1 and v2 are resolved in the
 ;; parent scope which in this case is the
 ;; namespace/global You can even nest `let`
-;; bindings and use them inside functions.
-;; Here we use `println` to print to the standard output
-;; a message
+;; bindings and use them inside functions.  Here
+;; we use `println` to print to the standard
+;; output a message
 
 (let [v1 "this is a local value"] ;; outer block
   (println "outer-v1:" v1)
@@ -1956,9 +1964,9 @@ v2
 ;; We briefly introduced `if` for flow control,
 ;; which is the basic form on top of which all the
 ;; others are based upon.  Moreover there are more
-;; options for flow control in Clojure which we will
-;; see i.e `if`,`not`, `and`, `or`, `if-not`, `when`,
-;; `when-not`, `cond` and `case`.
+;; options for flow control in Clojure which we
+;; will see i.e `if`,`not`, `and`, `or`, `if-not`,
+;; `when`, `when-not`, `cond` and `case`.
 ;;
 ;;
 ;;     (if condition
@@ -1967,12 +1975,13 @@ v2
 ;;
 ;; the `condition` doesn't have to be a boolean
 ;; expression necessarily as, in Clojure, anything
-;; is considered to be `true` except `false` and `nil`
-;; As you would expect if the `condition` is evaluated
-;; to be true the `then` expression is evaluated,
-;; otherwise the `else` expression is evaluated.
-;; The overall result will be determined by the
-;; result of the expression which is evaluated.
+;; is considered to be `true` except `false` and
+;; `nil` As you would expect if the `condition` is
+;; evaluated to be true the `then` expression is
+;; evaluated, otherwise the `else` expression is
+;; evaluated.  The overall result will be
+;; determined by the result of the expression
+;; which is evaluated.
 ;;
 
 (if (= 1 1)
@@ -2020,10 +2029,10 @@ v2
 ;;=> nil
 
 ;;
-;; `when` accepts more than one expression
-;; and the result of the overall expression
-;; is the result of last form, or `nil`
-;; if the condition is false.
+;; `when` accepts more than one expression and the
+;; result of the overall expression is the result
+;; of last form, or `nil` if the condition is
+;; false.
 
 (when true
   1
@@ -2252,13 +2261,15 @@ v2
 
 ;;=> (["Lorem" "ipsum" "dolor" "sit" "amet" "consectetur" "adipiscing" "elit"] ["Duis" "vel" "ante" "est"] ["Pellentesque" "habitant" "morbi" "tristique"] ["senectus" "et" "netus" "et" "malesuada" "fames" "ac" "turpis" "egestas"])
 
-;; application of the split function to a single sentence
-;; produces a list of words. Consequently the application
-;; of the function to all sentences produces a list of lists.
-;; If we rather have a single list with all the words
-;; we then need to concatenate all the sub-lists into one.
-;; To do so Clojure core has the `concat` function which
-;; just concatenates multiple lists into one.
+;; application of the split function to a single
+;; sentence produces a list of words. Consequently
+;; the application of the function to all
+;; sentences produces a list of lists.  If we
+;; rather have a single list with all the words we
+;; then need to concatenate all the sub-lists into
+;; one.  To do so Clojure core has the `concat`
+;; function which just concatenates multiple lists
+;; into one.
 
 (concat [0 1 2 3] [:a :b :c] '(d e f))
 ;;=> (0 1 2 3 :a :b :c d e f)
@@ -2408,18 +2419,18 @@ v2
 ;; #### The function: `group-by`
 ;;
 ;; Out of the box in Clojure you have a function
-;; to perform grouping on your data.
-;; `group-by` accepts a function and a collection
-;; and it will apply the given function
-;; to all items in the collection and then
-;; group the items using the result of the function,
-;; i.e items that give the same result when the function is
-;; applied end up in the same group.
-;; Each group will be associated with it's common function result.
-;; It returns a map where
-;; the key is the group common function result, and
-;; the value of the map is a list of items
-;; which belong to that group.
+;; to perform grouping on your data.  `group-by`
+;; accepts a function and a collection and it will
+;; apply the given function to all items in the
+;; collection and then group the items using the
+;; result of the function, i.e items that give the
+;; same result when the function is applied end up
+;; in the same group.  Each group will be
+;; associated with it's common function result.
+;; It returns a map where the key is the group
+;; common function result, and the value of the
+;; map is a list of items which belong to that
+;; group.
 
 (group-by odd? (range 10))
 ;;=> {false [0 2 4 6 8], true [1 3 5 7 9]}
@@ -2472,9 +2483,9 @@ v2
 ;;=> ((0 1 2) (3 4 5) (6 7 8) (9 10))
 
 ;;
-;; The `step` parameters tells the function
-;; how many item has to move forward after every chunk.
-;; if not given `step` is equal to `n`
+;; The `step` parameters tells the function how
+;; many item has to move forward after every
+;; chunk.  if not given `step` is equal to `n`
 
 (partition 3 1 (range 11))
 ;;=> ((0 1 2) (1 2 3) (2 3 4) (3 4 5) (4 5 6) (5 6 7) (6 7 8) (7 8 9) (8 9 10))
@@ -2485,11 +2496,12 @@ v2
 ;;
 ;; #### The function: `into`
 ;;
-;; `into` is used to create a new collection of a given
-;; type with all items from another collection "into" it.
-;; Items are conjoined using `conj`
-;; It is often used to change the type of a collection,
-;; or to build a map out of key/value pairs.
+;; `into` is used to create a new collection of a
+;; given type with all items from another
+;; collection "into" it.  Items are conjoined
+;; using `conj`. It is often used to change the
+;; type of a collection, or to build a map out of
+;; key/value pairs.
 ;;
 ;;      (into dest source)
 ;;
@@ -2497,6 +2509,8 @@ v2
 (into [] '(0 1 2 3 4 5 6 7 8 9))
 ;;=> [0 1 2 3 4 5 6 7 8 9]
 
+(into '() '(0 1 2 3 4 5 6 7 8 9))
+;;=> (9 8 7 6 5 4 3 2 1 0)
 
 (into (sorted-map) {:b 2, :c 3, :a 1})
 ;;=> {:a 1, :b 2, :c 3}
