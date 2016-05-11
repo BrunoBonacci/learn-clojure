@@ -25,6 +25,10 @@
 ;; which you downloaded as text "./data/shakespeare.txt"
 ;; and return a sequence of the longest 10 sequences,
 ;; of anagrams without duplicates.
+;;
+;; Advice: While solving this problem think about data
+;; transformations, rather than state accumulation.
+;;
 
 
 (defn top-anagrams
@@ -45,6 +49,7 @@
 ;;          (+ 1 1) => 2)
 ;;
 ;;
+
 (fact "Anagrams are extract sorted by the longest chain"
 
       (let [text "My Team's mate eats a lot of meat,
