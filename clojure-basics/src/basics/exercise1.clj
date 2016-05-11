@@ -14,20 +14,23 @@
 ;; the top 10 anagram sequences in Shakespeare's
 ;; opera.
 ;;
-;; An anagram sequence is a group of words which are
-;; made by rearranging the letters (case-insensitive).
-;; For example the words:
-;; "Team", "meat" and "Mate" are all anagram of each other
-;; and can belong to the same sequence as the use the same letters.
-;; While "tar" and "rat" belong to another sequence of anagrams.
+;; An anagram sequence is a group of words which
+;; are made by rearranging the letters
+;; (case-insensitive).  For example the words:
+;; "Team", "meat" and "Mate" are all anagram of
+;; each others and belong to the same sequence,
+;; while "eats" and "seat" belong to another
+;; sequence of anagrams.
 ;;
-;; Write a function which takes the Shakespeare opera as input
-;; which you downloaded as text "./data/shakespeare.txt"
-;; and return a sequence of the longest 10 sequences,
-;; of anagrams without duplicates.
+;; Write a function which takes the Shakespeare
+;; opera as input which you downloaded as text
+;; "./data/shakespeare.txt" and return a sequence
+;; of the longest 10 sequences, of anagrams
+;; without duplicates.
 ;;
-;; Advice: While solving this problem think about data
-;; transformations, rather than state accumulation.
+;; Advice: While solving this problem think about
+;; data transformations, rather than state
+;; accumulation.
 ;;
 
 
