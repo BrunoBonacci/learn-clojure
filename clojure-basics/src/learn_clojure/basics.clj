@@ -18,11 +18,11 @@
 ;;
 ;; ### The REPL
 ;;
-;; The REPL is (IMHO) one of the key Clojure's
-;; feature. REPL stands for: __Read Eval Print
-;; Loop__ and although is present in many
+;; The REPL is (IMHO) one of the key Clojure
+;; features. REPL stands for: __Read Eval Print
+;; Loop__ and although this is present in many
 ;; languages such as python, ruby and soon Java as
-;; well, in Clojure is part of the main
+;; well, in Clojure it is part of the main
 ;; development workflow. In other words if you are
 ;; not using the REPL for your Clojure development
 ;; you are doing it wrong!
@@ -35,10 +35,10 @@
 ;; It is the best way to explore a system or a
 ;; dataset and get familiar with its domain.
 ;;
-;; In terms of feedback loop is way better than
-;; the TDD at the point that is creating a new
-;; development methodology the **REPL Driven
-;; Development**
+;; In terms of feedback, the Read Eval Print Loop
+;; is so much better that TDD, that a new
+;; development methodology has been created/inspired..
+;; the **REPL Driven Development**
 ;;
 ;; For this session we are going to use the REPL
 ;; to explore Clojure features, this might give a
@@ -73,7 +73,7 @@
 ;; The difference is that the semicolon comment is
 ;; ignored by the reader, while the `comment`
 ;; block is something that you could have
-;; implemented yourself using the macros, which it
+;; implemented yourself using the macros, which in
 ;; this case just tells the compiler to not
 ;; generate anything any code.
 ;;
@@ -147,7 +147,7 @@
 ;; see a Clojure expression followed by `;;=>` and
 ;; followed by another value it means that the
 ;; result of the evaluation of the prior
-;; expression is what follow the marker. For
+;; expression is what follows the marker. For
 ;; example the evaluation of the expression `(+ 1
 ;; 1)` with its result will be noted as follow:
 ;;
@@ -182,7 +182,7 @@ false
 ;; **"truthiness"**. In strongly typed languages
 ;; such as Java you can only use boolean in
 ;; conditional operation.  Some other languages
-;; such C/C++ have a more lose definition
+;; such C/C++ have a more loose definition
 ;; **"truthiness"**.  __In Clojure everything is
 ;; considered **true** with the exception of
 ;; `false` and `nil`.__
@@ -270,7 +270,7 @@ false
 ;;=> 15
 
 ;;
-;; You can access static fields by adding
+;; You can access static fields by
 ;; providing the fully qualified class name
 ;; followed by a slash (`/`) and the field name,
 ;; for example: `java.lang.Long/MAX_VALUE`.
@@ -487,18 +487,18 @@ java.lang.Long/MAX_VALUE
 ;; ### Collections
 ;;
 ;; In Java the only collection literals available
-;; is the array.  Clojure like most of modern
+;; is the array.  Clojure like most modern
 ;; languages offers a variety of collection
 ;; literals which makes the language more
-;; expressive, out-of-the-box are supported the
-;; following collections literals: single linked
+;; expressive. Out-of-the-box support is provided for
+;; the following collections literals: single linked
 ;; lists, vectors, maps (or dictionaries) and
 ;; sets.  However Clojure supports a larger number
 ;; of data structures which are built with
 ;; functions such as: sorted maps, sorted sets,
-;; array maps, hash maps, hash sets and many more
-;; are available in community maintained library
-;; such as graphs, ring buffers and AVL
+;; array maps, hash maps and hash sets. Many more
+;; data structures are available in community maintained
+;; libraries such as graphs, ring buffers and AVL
 ;; trees. **All Clojure collections can contain a
 ;; mixture of values**.
 ;;
@@ -652,8 +652,8 @@ java.lang.Long/MAX_VALUE
 ;;
 ;; Maps are associative data structures (often
 ;; called dictionaries) which maps keys to their
-;; corresponding value.  Maps have a literals form
-;; which it can be expressed by any number of
+;; corresponding value.  Maps have a literal form
+;; which can be expressed by any number of
 ;; key/value pairs surrounded by curly brackets,
 ;; or by using `hash-map` or `array-map`
 ;; functions. Hash-maps provides a `near O(1)`
@@ -713,7 +713,7 @@ java.lang.Long/MAX_VALUE
 ;; eliminates all duplicates.  Clojure has a
 ;; literal form for sets which is expressed by a
 ;; sequence of values surrounded by `#{
-;; }`. Otherwhise you construct a set using the
+;; }`. Otherwise you construct a set using the
 ;; `set` function.  With `conj` you can "add" a
 ;; new element to an existing set, and `disj` to
 ;; "remove" an element from the set.  With
@@ -765,11 +765,11 @@ java.lang.Long/MAX_VALUE
 ;; implements. This interface resembles to a Java
 ;; iterator, and it implements methods like
 ;; `first()`, `rest()`, `more()` and `cons()`. The
-;; power of this abstraction is that is general
+;; power of this abstraction is that it is general
 ;; enough to be used in all data structures
 ;; (lists, vectors, maps, sets and even strings
 ;; can all produce sequences) and you have loads
-;; of functions which manipulates them. Functions
+;; of functions which manipulates it. Functions
 ;; such as `first`, `rest`, `next` and `last` and
 ;; many others such as `reverse`, `shuffle`,
 ;; `drop`, `take`, `partition`, `filter` etc are
@@ -782,13 +782,13 @@ java.lang.Long/MAX_VALUE
 ;; data-structure.
 ;;
 ;; You can create a sequence explicitly with the
-;; `seq` function but there are loads of function
+;; `seq` function but there are loads of functions
 ;; which already return a sequence. The sequence
 ;; of a list is the list itself, other
 ;; data-structures will produce one.  Maps will
-;; produce a sequence of map entry, where each
+;; produce a sequence of map entries, where each
 ;; entry can be represented like a vector of two
-;; values the key and it's value.
+;; values (the key and it's value.)
 ;;
 
 (seq '(1 2 3 4))
@@ -804,8 +804,8 @@ java.lang.Long/MAX_VALUE
 ;;=> ([:a 1] [:b 2] [:c 3])
 
 ;;
-;; There is no need to call `seq` explicitly in
-;; most of the cases all function which takes a
+;; There is no need to call `seq` explicitly, in
+;; most of the cases, functions which take a
 ;; sequence can work with all data structures
 ;; directly.
 ;;
@@ -830,7 +830,7 @@ java.lang.Long/MAX_VALUE
 
 ;;
 ;; Because the Clojure String implements the sequence
-;; abstraction you can treat the String as a sequence
+;; abstraction, you can treat the String as a sequence
 ;; of characters.
 ;;
 
@@ -851,25 +851,31 @@ java.lang.Long/MAX_VALUE
 ;;
 ;; Some of the sequences produced by the core
 ;; library are lazy which means that the entire
-;; collection won't be create, but at first only
-;; the iterator like structure is created while
-;; the consumer is fetching the `next()` item it
-;; will be computed. This is a very important
-;; element of the language which allows to express
-;; easily infinite sequences without running out
+;; collection won't be created (*realised*) all at once.
+;; At first, an iterator like structure is created,
+;; with subsequent calls to `next()` causing chunks
+;; of items to be fetched/computed. This is a very important
+;; element of the language which allows the easy expression
+;; of infinite sequences without running out
 ;; of memory. For example the function `range`
 ;; returns a lazy sequence of natural numbers
 ;; between two given numbers. But when it is
 ;; called without arguments it returns a lazy
 ;; sequence of all natural numbers.  Yet it
 ;; doesn't run out of memory. What it really
-;; produce it is just a iterator that computes the
-;; next number when the `next()` is called.
-;;
+;; produces is just an iterator that computes the
+;; next chunk of numbers when `next()` is called.
+;; NOTE: As subsequent calls are made to `next()`,
+;; it is advisable not to reference/hold earlier lazy sequence
+;; items for too long. This allows earlier items to be cleared
+;; from memory and prevents OOM (OutOfMemoryError).
 
 (range 5 10)
 ;;=> (5 6 7 8 9)
 
+;; WARNING !!!  Don't evaluate this from your repl as it will hang/crash !!
+;; Evaluating this from your repl, will cause the repl to try and evaluate
+;; an infinite lazy sequence all at once.
 (range)
 ;;=> (0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 ...)
 
@@ -879,10 +885,10 @@ java.lang.Long/MAX_VALUE
 ;;
 ;; ### Regular expression patterns
 ;;
-;; Clojure supports also regular expression
+;; Clojure also supports regular expression
 ;; patterns as literals which directly map to the
 ;; `java.util.Pattern` and offers a number of
-;; function to match, find and extract patterns.
+;; functions to match, find and extract patterns.
 ;; For example: `re-find` and `re-seq` to find
 ;; respectively the first or all occurrences of a
 ;; matching pattern. With `re-pattern` you can
@@ -925,7 +931,7 @@ java.lang.Long/MAX_VALUE
 
 ;;
 ;; Using `re-matcher`, `re-matches`, `re-groups`
-;; you can have fine control over the capturing
+;; allows you to have fine control over the capturing
 ;; groups.
 
 
@@ -933,8 +939,8 @@ java.lang.Long/MAX_VALUE
 ;; ### Symbols and Vars
 ;;
 ;; Symbols in Clojure are a way to identify things
-;; in your programs which my have various values
-;; at runtime. Like in mathematical notation `x`
+;; in your programs which may have various values
+;; at runtime. Like in a mathematical notation, `x`
 ;; is something not known which could assume
 ;; several different values.  In a programming
 ;; context, Clojure symbols are similar to
@@ -948,9 +954,9 @@ java.lang.Long/MAX_VALUE
 ;;
 ;; Everything we have seen so far were pure
 ;; values, as such they were all evaluating to
-;; themselves.  Like `42` is just `42`, a the
-;; following vector `[:a "hello" 9]` it just
-;; evaluate to itself, it's just a value.
+;; themselves.  Like `42` is just `42`, the
+;; following vector `[:a "hello" 9]` just
+;; evaluates to itself, it is just a value.
 ;; Symbols, however, during the evaluation
 ;; are replaced with the current value of var
 ;; they are pointing to. If you try to evaluate
@@ -964,9 +970,9 @@ java.lang.Long/MAX_VALUE
 ;; different namesapce pointing to different
 ;; values.
 ;;
-;; In Clojure symbols start with a letter, and can contains
-;; letters, numbers, dashes, some punctuation mark and other
-;; characters. Basically anything which doesn't belong the
+;; In Clojure symbols start with a letter, and can contain
+;; letters, numbers, dashes, some punctuation marks and other
+;; characters. Basically anything which doesn't belong in the
 ;; Clojure syntax (following characters aren't accepted in
 ;; symbols name `@#,/.[]{}()`) anything else is a valid
 ;; symbol.
@@ -1021,6 +1027,7 @@ age
            :level    32
            :achievements #{:fast-run :precision10
                            :strategy}})
+;;=> #'learn-clojure.basics/user
 
 user
 ;;=> {:username "bruno1", :score 12345, :level 32, :achievements #{:precision10 :strategy :fast-run}}
@@ -1040,10 +1047,10 @@ user
 ;; important aspect of Clojure approach to
 ;; functional programming.  In Clojure functions
 ;; transform values into new values and values are
-;; just values. Like it is absurd to think of
-;; changing a number composite data structure
-;; behave in the same way. So function
-;; do not mutate values but just produce new ones.
+;; just values. Since it is absurd to think of
+;; changing a number (1 is always 1),
+;; composite data structures are treated in the same way.
+;; So functions do not mutate values they just produce new ones.
 ;; Like adding `1` to `42` produces `43` but
 ;; doesn't really change the number `42` as it keeps on
 ;; existing on its own, adding an element to a list will
@@ -1062,8 +1069,10 @@ user
 ;;
 
 (def colours '(:red :green :blue))
+;;=> #'learn-clojure.basics/colours
 
 (def new-colours (cons :black colours))
+;;=> #'learn-clojure.basics/new-colours
 
 new-colours
 ;;=> (:black :red :green :blue)
@@ -1074,8 +1083,10 @@ colours
 (def user {:username "bruno1"
            :score    12345
            :level    32})
+;;=> #'learn-clojure.basics/user
 
 (def user' (assoc user :level 33))
+;;=> #'learn-clojure.basics/user'
 
 user'
 ;;=> {:username "bruno1", :score 12345, :level 33}
@@ -1086,17 +1097,17 @@ user
 ;;
 ;; ### Functions
 ;;
-;; If so far we have see how to represent data in
+;; So far we have seen how to represent data in
 ;; our system, now we will see how to make sense
-;; of this data, how extract value, process,
-;; transform etc.  The way we express this in
+;; of this data and how to extract/process/transform it.
+;; The way we express this in
 ;; Clojure is via functions.
 ;;
 ;;
 ;; #### Purity
 ;;
 ;; While Clojure doesn't enforce purity at
-;; compiler level, it certainly promote
+;; compiler level, it certainly promotes
 ;; pure-functions.  Pure functions are those
 ;; functions in which the processing doesn't use
 ;; or produce any side effect, which means it will
@@ -1107,20 +1118,20 @@ user
 ;; When a function given a certain input, always
 ;; produces the same output it is said to be
 ;; __referentially transparent__, because the
-;; function it call itself can be replaced with
+;; function call itself can be replaced with
 ;; its value without altering the rest of the
 ;; expression.
 ;;
 ;; Pure functions are important because
 ;; they are incredibly easy to test as
-;; they don't depend from external state.
+;; they don't depend on external state.
 ;;
-;; Here two example: the first is the function `+`
-;; which we have already seen, and the second
-;; function is `rand-int` which produce a random
+;; Here are two examples: the first is the function `+`
+;; which we have already seen, and the second is the
+;; function `rand-int` which produce a random
 ;; integer number between `0` and the given
 ;; integer.  While the first is pure because given
-;; the same input parameters always produces the
+;; the same input parameters it will always produce the
 ;; same output, the second one given the same
 ;; input returns a different value every time.
 ;;
@@ -1158,7 +1169,7 @@ user
 ;;
 ;; This is the simplest way to define a function.
 ;;
-;; Now to refer to this function on our code we
+;; Now to refer to this function in our code we
 ;; need to give it a name. We can do so with `def`
 ;; as we done earlier.
 ;;
@@ -1173,7 +1184,7 @@ user
 ;;=> -41
 
 ;;
-;; As said earlier, during the evaluation process
+;; As mentioned earlier, during the evaluation process
 ;; the symbol `plus-one` is simply replaced with
 ;; its value, in the same way we can replace the
 ;; symbol with the function definition and obtain
@@ -1188,7 +1199,7 @@ user
 ;;=> -41
 
 ;;
-;; Since defining functions is very common there
+;; Since defining functions is very common, there
 ;; is a shorthand to the idiom
 ;; `(def funciton-name (fn [parameter list] (expression)))`
 ;; via the `defn` form which just combines the `def` and
@@ -1198,23 +1209,25 @@ user
 
 (defn plus-one [n]
   (+ n 1))
+;;=> #'learn-clojure.basics/plus-one
 
 (plus-one 1)
 ;;=> 2
 
 ;;
 ;; It is good practice to include a short description (called `docstring`)
-;; to the function.
+;; in the function.
 ;;
 
 (defn plus-one
   "Returns a number which is one greater than the given `n`."
   [n]
   (+ n 1))
+;;=> #'learn-clojure.basics/plus-one
 
 ;;
 ;; **NOTE:** that Clojure core already contains
-;; such function and it is called `inc`, while the
+;; such a function and it is called `inc`, while the
 ;; function `dec` decrements by 1 the given value.
 ;;
 
@@ -1228,7 +1241,7 @@ user
 ;; Let's assume we have to create
 ;; a function which create a corporate email
 ;; address for its employee. Oftentimes
-;; this type of email follow a very specific pattern
+;; this type of email follows a very specific pattern
 ;; In this case we will take the first letter of
 ;; the name followed by the lastname then `@` the company
 ;; domain.
@@ -1236,6 +1249,7 @@ user
 
 (defn email-address [firstname lastname domain]
   (clojure.string/lower-case (str (first firstname) lastname "@" domain)))
+;;=> #'learn-clojure.basics/email-address
 
 (email-address "John" "Smith" "acme.org")
 ;;=> "jsmith@acme.org"
@@ -1246,7 +1260,7 @@ user
 ;;
 ;; #### Function with multi-arities
 ;;
-;; So far we seen how to create functions with
+;; So far we've seen how to create functions
 ;; which accept a fix number of parameters.
 ;; In Clojure is possible to create functions
 ;; which accept different set of 'arities'.
@@ -1257,7 +1271,7 @@ user
    (simple-greet "World"))
   ([name]
    (str "Hello " name "!")))
-
+;;=> #'learn-clojure.basics/simple-greet
 
 (simple-greet)
 ;;=> "Hello World!"
@@ -1275,7 +1289,7 @@ user
    (str "Hi, you must be: " lastname ", " firstname " " lastname))
   ([title firstname lastname]
    (str "Hello " title " " firstname " " lastname)))
-
+;;=> #'learn-clojure.basics/greet
 
 (greet)
 ;;=> "Hey, Stranger!"
@@ -1298,12 +1312,14 @@ user
 
 (defn de-dup [& names]
   (seq (set names)))
+;;=> #'learn-clojure.basics/de-dup
 
 (de-dup "John" "Fred" "Lara" "John" "John" "Susan")
 ;;=> ("Susan" "Fred" "John" "Lara")
 
 (defn short-name [firstname & names]
   (str firstname " " (last names)))
+;;=> #'learn-clojure.basics/short-name
 
 (short-name "Maria" "Teresa" "Jiulia" "Ramírez de Arroyo" "García")
 ;;=> "Maria García"
@@ -1320,6 +1336,7 @@ user
 
 (defn is-commutative? [op a b]
   (= (op a b) (op b a)))
+;;=> #'learn-clojure.basics/is-commutative?
 
 (is-commutative? + 3 7)
 ;;=> true
@@ -1331,8 +1348,10 @@ user
 (defn multiplier [m]
   (fn [n]
     (* n m)))
+;;=> #'learn-clojure.basics/multiplier
 
 (def doubler (multiplier 2))
+;;=> #'learn-clojure.basics/doubler
 
 (doubler 5)
 ;;=> 10
@@ -1341,6 +1360,7 @@ user
 ;;=> 20
 
 (def mult-10x (multiplier 10))
+;;=> #'learn-clojure.basics/mult-10x
 
 (mult-10x 35)
 ;;=> 350
@@ -1350,17 +1370,18 @@ user
 ;;
 ;; Oftentimes you want to create a function for a
 ;; specific task in a local context. Such
-;; functions don't have reason to have a global
+;; functions don't have any reason to have a global
 ;; name as they are meaningful only in that
-;; specific context in this case you can create
+;; specific context, in this case you can create
 ;; anonymous functions (also called lambda
 ;; function) and Clojure has some support to make
-;; this easier.  We already seen some example of
-;; anonymous function with our very first function
+;; this easier.  We already seen an example of
+;; an anonymous function with our very first function
 ;; example.
 ;;
 
-(fn [n] (+ n 1))
+(fn [n] (+ n 1)) ;;Evaluates to an object/value. In Clojure, functions are values
+;;=> #function[learn-clojure.basics/eval20002/fn--20003]
 
 ((fn [n] (+ n 1)) 10)
 ;;=> 11
@@ -1373,6 +1394,7 @@ user
 ;; in the following way.
 
 #(+ % 1)
+;;=> #function[learn-clojure.basics/eval20028/fn--20029]
 
 (#(+ % 1) 10)
 ;;=> 11
@@ -1399,23 +1421,24 @@ user
 ;; parameters list.
 ;;
 ;; Like in our `multiplier` function example,
-;; the returned function closing over the
+;; the returned function is closing over the
 ;; value `m` which is not in its parameter list
 ;; but it is a parameter of the parent context
-;; the `multiplier`. While `n` is a normal parameter
+;; the `multiplier` fn. While `n` is a normal parameter
 ;; `m` is the value we are "closing over"
 ;; providing a context for that function.
 
 (defn multiplier [m]
   (fn [n]
     (* n m)))
+;;=> #'learn-clojure.basics/multiplier
 
 ;;
 ;; Let's see another example. Here
 ;; we want to create a function which
-;; takes a number and return a logical true
-;; value is the value of the number
-;; is between two limits (limits included)
+;; takes a number and return a logical value
+;; representing whether the number
+;; is between two limits (limits included).
 ;; For this purpose we can use the function `>=`
 ;; which returns whether a number is greater or equal
 ;; then the other one.
@@ -1439,9 +1462,10 @@ user
 (defn limit-checker [min max]
   (fn [n]
     (>= max n min)))
-
+;;=> #'learn-clojure.basics/limit-checker
 
 (def legal-value (limit-checker 5 10))
+;;=> #'learn-clojure.basics/legal-value
 
 (legal-value 1)
 ;;=> false
@@ -1459,12 +1483,12 @@ user
 ;; #### Recursion
 ;;
 ;; A recursive function is a function which
-;; call itself. There are two type of recursion
+;; calls itself. There are two types of recursion
 ;; the mundane recursion and the tail recursion.
 ;;
 ;; Let's see an example of both with this function
 ;; which given a number it calculates the sum of
-;; all natural number which from 1 to the given
+;; all natural numbers from 1 to the given
 ;; number.
 
 (defn sum1
@@ -1475,7 +1499,7 @@ user
      accumulator
      ;; else
      (sum1 (dec n) (+ n accumulator)))))
-
+;;=> #'learn-clojure.basics/sum1
 
 (sum1 1)
 ;;=> 1
@@ -1510,6 +1534,7 @@ user
      accumulator
      ;; else
      (recur (dec n) (+ n accumulator)))))
+;;=> #'learn-clojure.basics/sum2
 
 (sum2 10)
 ;;=> 55
@@ -1537,7 +1562,7 @@ user
 ;; common in recursion, while recurring
 ;; you have to keep track of some
 ;; accumulated value, therefore Clojure
-;; make it simpler by providing another
+;; makes it simpler by providing another
 ;; form called `loop` which plays well
 ;; with `recur`. In Clojure you'll often
 ;; hear about `loop/recur` construct.
@@ -1554,6 +1579,7 @@ user
       accumulator
       ;; else
       (recur (dec n) (+ n accumulator)))))
+;;=> #'learn-clojure.basics/sum3
 
 (sum3 10)
 ;;=> 55
@@ -1569,7 +1595,7 @@ user
     ;; else
     (+ (fibonacci1 (- n 1))
        (fibonacci1 (- n 2)))))
-
+;;=> #'learn-clojure.basics/fibonacci1
 
 (fibonacci1 1)
 ;;=> 1
@@ -1581,9 +1607,9 @@ user
 ;;
 ;; Now this is a simple and very functional
 ;; definition of the Fibonacci sequence, however
-;; is particularly bad in terms of computational
+;; it is particularly bad in terms of computational
 ;; complexity.  in fact this is `O(2^n)`.
-;; Let's use the `time` function con
+;; Let's use the `time` function to
 ;; calculate how much it takes to compute the
 ;; 35th number in the sequence.
 ;;
@@ -1607,6 +1633,7 @@ user
     (if (< i 2)
       c
       (recur (dec i) (+' c p) c))))
+;;=> #'learn-clojure.basics/fibonacci2
 
 (fibonacci2 10)
 ;;=> 89
@@ -1625,14 +1652,14 @@ user
 ;;
 ;; #### Function composition and partial functions
 ;;
-;; We seen earlier that we functions such as `first`,
+;; We have seen earlier that there are functions such as `first`,
 ;; `second`, `last` and `rest` to access respectively
-;; the first item of the sequence, the second one,
-;; the last one and the tail of the sequence.
-;; If it happens that we are working with lots 5 items
-;; sequences we have the tools to get all but the third
-;; and the forth item. If you are doing a lot of them
-;; you'll probably extract into two functions as follow:
+;; the first item of the sequence, the second item,
+;; the last item and the tail of the sequence.
+;; These functions can be combined to create other functions
+;; for accessing the third, fourth, fifth and other positional items.
+;; The following functions are an example of how to construct
+;; two such functions.
 
 (defn third
   [coll]
@@ -1650,7 +1677,7 @@ user
 
 ;; But there is another way.
 ;; If, like in this case, the output of a function
-;; gets passed directly into the next one
+;; can be passed directly into the input of the next one
 ;; as a simple pipeline of functions
 ;; then you can just use the `comp` function.
 ;;
@@ -1700,7 +1727,7 @@ user
 (almost-twice-twice 10)
 ;;=> 37
 
-;; Another way we could have wrote the `doubler`
+;; Another way we could have written the `doubler`
 ;; function is by using the partial application
 ;; of the function `*`. In Clojure this
 ;; is achieved via the function `partial`.
@@ -1714,18 +1741,18 @@ user
 ;;=> 10
 
 ;; what happens here is that the `partial`
-;; function return a function which
+;; function returns a function which
 ;; calls `*` with the parameters of the partial
-;; and the parameter of the final call all in one call.
+;; and the parameter of the final call, all in one call.
 ;;
 ;; Another nice example is using the function `format`
 ;; which takes a format-string and a bunch of arguments
 ;; and formats the string accordingly. This is very similar
 ;; to the C `printf` function however Clojure uses the
 ;; Java `String.format` implementation.
-;; So we can use this to produce a string which contains
-;; a zero-padded formatted version of the given number.
-;;
+;; So we can use this to create a function that produces a
+;; string which contains a zero-padded formatted version of
+;; the given number.
 
 (def pad0 (partial format "%013d"))
 
@@ -1757,7 +1784,7 @@ user
 ;; Namespaces are like containers in which
 ;; vars live in, but namespaces,
 ;; once defined are **globally accessible**.
-;; As consequence when you define a var
+;; As a consequence when you define a var
 ;; using `def` or `defn` these will be accessible
 ;; globally.
 ;;
@@ -1768,15 +1795,19 @@ user
 
 
 (ns user.test.one)
+;;=> nil
 
 (def my-name "john")
+;;=> #'user.test.one/my-name
 
 my-name
 ;;=> "john"
 
 (ns user.test.two)
+;;=> nil
 
 (def my-name "julie")
+;;=> #'user.test.two/my-name
 
 my-name
 ;;=> "julie"
@@ -1794,22 +1825,27 @@ my-name
 ;;=> "john"
 
 (ns user.test.one)
+;;=> nil
 
 (def my-name (clojure.string/upper-case "john"))
+;;=> #'user.test.one/my-name
 
 my-name
 ;;=> "JOHN"
 
 (ns user.test.one
   (:require [clojure.string :as s]))
+;;=> nil
 
 (def my-name (s/upper-case "john"))
-
+;;=> #'user.test.one/my-name
 
 (ns user.test.one
   (:require [clojure.string :refer [upper-case]]))
+;;=> nil
 
 (def my-name (upper-case "john"))
+;;=> #'user.test.one/my-name
 
 my-name
 ;;=> "JOHN"
@@ -1817,8 +1853,10 @@ my-name
 (ns user.test.one
   (:require [clojure.string :refer [upper-case]])
   (:require [user.test.two :as two]))
+;;=> nil
 
 (def my-name (upper-case two/my-name))
+;;=> #'user.test.one/my-name
 
 my-name
 ;;=> "JULIE"
@@ -1914,8 +1952,8 @@ v2
 ;; We briefly introduced `if` for flow control,
 ;; which is the basic form on top of which all the
 ;; others are based upon.  Moreover there are more
-;; option for flow control in Clojure e we will
-;; see `if`,`not`, `and`, `or`, `if-not`, `when`,
+;; options for flow control in Clojure which we will
+;; see i.e `if`,`not`, `and`, `or`, `if-not`, `when`,
 ;; `when-not`, `cond` and `case`.
 ;;
 ;;
@@ -1958,6 +1996,8 @@ v2
 
 (if-not (= 1 0)
   (println "that's odd"))
+;;=> that's odd
+;;=> nil
 
 ;; But when there is no else expression
 ;; a more idiomatic way to write it in Clojure
@@ -1967,9 +2007,13 @@ v2
 
 (when (not= 1 0)
   (println "that's odd"))
+;;=> that's odd
+;;=> nil
 
 (when-not (= 1 0)
   (println "that's odd"))
+;;=> that's odd
+;;=> nil
 
 ;;
 ;; `when` accepts more than one expression
@@ -2075,10 +2119,10 @@ v2
 
 ;;
 ;; If you have complicated conditions you might
-;; have to combine condition logically with `and`,
-;; `or` and `not`. We already see `not` which
+;; have to combine the conditions logically with `and`,
+;; `or` and `not`. We've already seen `not` which
 ;; negates the given condition, while `and` and
-;; `or` they work as you would expect.
+;; `or` work as you would expect.
 ;;
 ;;     (and
 ;;       condition1
@@ -2105,7 +2149,7 @@ v2
 ;; Similarly `or` accepts multiple conditions,
 ;; and they are evaluated in the given order,
 ;; and the first condition which is found to
-;; be true it will give stop the evaluation
+;; be true will stop the evaluation
 ;; and return its value as the value of the
 ;; the whole expression.
 
@@ -2116,7 +2160,7 @@ v2
 ;;=> 1
 
 ;;
-;; `or` it is often used for provide default
+;; `or` is often used to provide default
 ;; values to parameters function via destructuring
 ;; however it can be used in normal code as well.
 ;;
@@ -2137,17 +2181,17 @@ v2
 ;;
 ;; ### Core functions
 ;;
-;; The core has hundreds of functions defined
-;; which they all work on the basic data structures
-;; we seen so far. You can find the full list
+;; The core has hundreds of functions defined,
+;; which all work on the basic data structures
+;; that we've seen so far. You can find the full list
 ;; in the [Clojure cheatsheet](http://clojure.org/api/cheatsheet)
 ;;
 ;;
 ;; #### The function: `apply`
 ;;
 ;; For the purpose of this course we will
-;; see only a few starting with `apply`.
-;; As the same suggest it "applies" a function
+;; only see a few examples starting with `apply`.
+;; As the same suggests, it "applies" a function
 ;; to a given list of arguments.
 ;;
 ;;      (apply f args)
@@ -2171,12 +2215,12 @@ v2
 ;; Next we will see one of the most used functions
 ;; in the core `map` which has nothing to do with
 ;; the associative maps (data structures) we seen
-;; before.  `map` come from the set theory and is
+;; before.  `map` comes from the set theory and is
 ;; a function which takes a function and a
 ;; sequence of values and applies the function to
 ;; all values in the sequence. It returns a
 ;; lazy-sequence which means that the function
-;; application is performed when calling `map`,
+;; application is not performed when calling `map`,
 ;; but it will be performed when the result will
 ;; be consumed.
 ;;
@@ -2190,10 +2234,10 @@ v2
 ;;
 ;; #### The function: `mapcat`
 ;;
-;; Sometime the application of the function `f`
-;; return a list of things like in the following
-;; example were we are splitting into words the
-;; following sentences.
+;; Sometimes the application of the function `f`
+;; returns a list of things. In the following
+;; example, applying the split function to each sentence
+;; spilts each sentence and returns a list of words.
 ;;
 
 (map #(clojure.string/split % #"\W+")
@@ -2227,7 +2271,7 @@ v2
 ;;=> ("Lorem" "ipsum" "dolor" "sit" "amet" "consectetur" "adipiscing" "elit" "Duis" "vel" "ante" "est" "Pellentesque" "habitant" "morbi" "tristique" "senectus" "et" "netus" "et" "malesuada" "fames" "ac" "turpis" "egestas")
 
 ;;
-;; This construct if common enough that Clojure has
+;; This construct is common enough that Clojure has
 ;; a core function that does just this called `mapcat`.
 
 (mapcat #(clojure.string/split % #"\W+")
@@ -2281,7 +2325,7 @@ v2
 ;; takes a *predicate function* and a collection
 ;; and returns a lazy-sequence of the items in the
 ;; collection for which the application of the
-;; function returns a "thruthy" value.  Predicate
+;; function returns a "truthy" value.  Predicate
 ;; functions are functions which takes one
 ;; parameter and return a logical true or false.
 ;;
@@ -2298,7 +2342,7 @@ v2
 
 ;;
 ;; `identity` is a function which given a value
-;; it just return the value.
+;; will just return the value.
 ;; This is often used when a function transformation
 ;; is required as parameter, but no transformation is wanted.
 ;; another idiomatic use of it is to remove nil and false
@@ -2325,7 +2369,7 @@ v2
 ;; #### The function: `sort`
 ;;
 ;; `sort` as you would expect returns a sorted
-;; sequence of the element in the given collection.
+;; sequence of the elements in the given collection.
 ;;
 ;;      (sort coll)
 ;;      (sort comp coll)
@@ -2363,10 +2407,13 @@ v2
 ;; to perform grouping on your data.
 ;; `group-by` accepts a function and a collection
 ;; and it will apply the given function
-;; to all items in the collections and groups
-;; those which have the same result into
-;; the same key. It returns a map where
-;; the key is the group-value, and
+;; to all items in the collection and then
+;; group the items using the result of the function,
+;; i.e items that give the same result when the function is
+;; applied end up in the same group.
+;; Each group will be associated with it's common function result.
+;; It returns a map where
+;; the key is the group common function result, and
 ;; the value of the map is a list of items
 ;; which belong to that group.
 
@@ -2423,7 +2470,7 @@ v2
 ;;
 ;; The `step` parameters tells the function
 ;; how many item has to move forward after every chunk.
-;; if not give `step` is equal to `n`
+;; if not given `step` is equal to `n`
 
 (partition 3 1 (range 11))
 ;;=> ((0 1 2) (1 2 3) (2 3 4) (3 4 5) (4 5 6) (5 6 7) (6 7 8) (7 8 9) (8 9 10))
@@ -2437,7 +2484,7 @@ v2
 ;; `into` is used to create a new collection of a given
 ;; type with all items from another collection "into" it.
 ;; Items are conjoined using `conj`
-;; It is often used to change the type of a map,
+;; It is often used to change the type of a collection,
 ;; or to build a map out of key/value pairs.
 ;;
 ;;      (into dest source)
@@ -2490,18 +2537,18 @@ v2
 ;; What happens if the file you trying to read
 ;; doesn't exists? or the device you trying to
 ;; write to is full? The underlying Java APIs will
-;; throw an exception.  Clojure provide access to
+;; throw an exception.  Clojure provides access to
 ;; the java machinery for error handling and you
 ;; can use `try`, `catch`, `finally` and `throw`
 ;; with the same semantic as the Java's ones.
 ;;
 ;; You have to surround the code which might throw
-;; exception using a `try` form, then you can
+;; an exception using a `try` form, then you can
 ;; handle the errors by their native type with a
 ;; `catch` block.  Finally is a block that gets
-;; executed no matter what happen in the block and
+;; executed no matter what happen in the try block and
 ;; whether or not an exception is raised.  `throw`
-;; is to throw an exception from your own code.
+;; is used to throw an exception from your own code.
 
 (slurp "/this_doesnt_exists.txt")
 ;;=> FileNotFoundException /this_doesnt_exists.txt (No such file or directory)
@@ -2512,6 +2559,7 @@ v2
   (catch Exception x
     (println "unable to read file.")
     ""))
+;;=> unable to read file
 ;;=> ""
 
 ;;
