@@ -61,3 +61,11 @@ The following sections are described:
     * spit
   * Error handling
   * Macros (blog post)
+
+## Getting started
+
+Start your IDE of choice and open the file `src/basics/welcome.clj`
+and evaluate the expression.
+
+Then open `learn_clojure/basics.clj` and read through
+the description.

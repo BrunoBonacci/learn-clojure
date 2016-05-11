@@ -9,6 +9,6 @@
 ;;
 ;;  This should evaluate the s-expression.
 ;;  If you get `2` then your environment is
-;;  ready to go, otherwise seek a teacher help.
+;;  ready to go, otherwise seek teacher's help.
 
 (+ 1 1)
