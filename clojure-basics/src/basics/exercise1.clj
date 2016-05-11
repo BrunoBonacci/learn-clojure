@@ -1,6 +1,5 @@
 (ns basics.exercise1
-  (:require [midje.sweet :refer [fact]])
-  (:require [clojure.string :as str]))
+  (:require [midje.sweet :refer [fact]]))
 
 
 ;;
@@ -48,13 +47,11 @@
 ;;
 (fact "Anagrams are extract sorted by the longest chain"
 
-      (let [text "My Team's mate eats a lot of meat.
-                  While the rat on the tar is causing
-                  trouble to the people laying the new tar
-                  on the road."]
+      (let [text "My Team's mate eats a lot of meat,
+                  and he never leaves his seat."]
 
         (top-anagrams text)) => [["meat" "mate" "team"]
-                                 ["rat" "tar"]])
+                                 ["eats" "seat"]])
 
 
 
