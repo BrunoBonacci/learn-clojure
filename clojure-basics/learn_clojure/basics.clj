@@ -727,8 +727,14 @@ java.lang.Long/MAX_VALUE
 #{1 2 4}
 ;;=> #{1 4 2}
 
-#{ 1 1 3 5}
-;;=> IllegalArgumentException Duplicate key: 1
+;;
+;; If you put twice the same element
+;; your Clojure code will be syntactically
+;; incorrect. At the REPL you will get
+;; an error.
+;;
+;; #{ 1 1 3 5}
+;; ;;=> IllegalArgumentException Duplicate key: 1
 
 #{:a 4 5 :d "hello"}
 ;;=> #{"hello" 4 5 :d :a}
