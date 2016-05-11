@@ -851,31 +851,35 @@ java.lang.Long/MAX_VALUE
 ;;
 ;; Some of the sequences produced by the core
 ;; library are lazy which means that the entire
-;; collection won't be created (*realised*) all at once.
-;; At first, an iterator like structure is created,
-;; with subsequent calls to `next()` causing chunks
-;; of items to be fetched/computed. This is a very important
-;; element of the language which allows the easy expression
-;; of infinite sequences without running out
-;; of memory. For example the function `range`
-;; returns a lazy sequence of natural numbers
-;; between two given numbers. But when it is
-;; called without arguments it returns a lazy
+;; collection won't be created (*realised*) all at
+;; once.  At first, an iterator like structure is
+;; created, with subsequent calls to `next()`
+;; causing chunks of items to be
+;; fetched/computed. This is a very important
+;; element of the language which allows the easy
+;; expression of infinite sequences without
+;; running out of memory. For example the function
+;; `range` returns a lazy sequence of natural
+;; numbers between two given numbers. But when it
+;; is called without arguments it returns a lazy
 ;; sequence of all natural numbers.  Yet it
 ;; doesn't run out of memory. What it really
 ;; produces is just an iterator that computes the
 ;; next chunk of numbers when `next()` is called.
-;; NOTE: As subsequent calls are made to `next()`,
-;; it is advisable not to reference/hold earlier lazy sequence
-;; items for too long. This allows earlier items to be cleared
-;; from memory and prevents OOM (OutOfMemoryError).
+;;
+;; _NOTE: As subsequent calls are made to
+;; `next()`, it is advisable not to reference/hold
+;; earlier lazy sequence items for too long. This
+;; allows earlier items to be cleared from memory
+;; and prevents OOM (OutOfMemoryError)._
 
 (range 5 10)
 ;;=> (5 6 7 8 9)
 
-;; WARNING !!!  Don't evaluate this from your repl as it will hang/crash !!
-;; Evaluating this from your repl, will cause the repl to try and evaluate
-;; an infinite lazy sequence all at once.
+;; _**WARNING!!!** Evaluating this from your REPL
+;; might hang/crash your process_, as it will try
+;; evaluate an infinite lazy sequence all at once.
+
 (range)
 ;;=> (0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 ...)
 

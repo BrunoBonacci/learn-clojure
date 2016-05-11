@@ -2,9 +2,10 @@
 
 Curriculum for an introductory course to Clojure.
 
-## Authors
+## Author & contributors
 
 * Bruno Bonacci
+* Dayo Oliyide
 
 ## Setup
 
