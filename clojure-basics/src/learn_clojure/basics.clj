@@ -18,11 +18,11 @@
 ;;
 ;; ### The REPL
 ;;
-;; The REPL is (IMHO) one of the key Clojure's
-;; feature. REPL stands for: __Read Eval Print
-;; Loop__ and although is present in many
+;; The REPL is (IMHO) one of the key Clojure
+;; features. REPL stands for: __Read Eval Print
+;; Loop__ and although this is present in many
 ;; languages such as python, ruby and soon Java as
-;; well, in Clojure is part of the main
+;; well, in Clojure it is part of the main
 ;; development workflow. In other words if you are
 ;; not using the REPL for your Clojure development
 ;; you are doing it wrong!
@@ -35,10 +35,10 @@
 ;; It is the best way to explore a system or a
 ;; dataset and get familiar with its domain.
 ;;
-;; In terms of feedback loop is way better than
-;; the TDD at the point that is creating a new
-;; development methodology the **REPL Driven
-;; Development**
+;; In terms of feedback, the Read Eval Print Loop
+;; is so much better that TDD, that a new
+;; development methodology has been created/inspired..
+;; the **REPL Driven Development**
 ;;
 ;; For this session we are going to use the REPL
 ;; to explore Clojure features, this might give a
@@ -73,7 +73,7 @@
 ;; The difference is that the semicolon comment is
 ;; ignored by the reader, while the `comment`
 ;; block is something that you could have
-;; implemented yourself using the macros, which it
+;; implemented yourself using the macros, which in
 ;; this case just tells the compiler to not
 ;; generate anything any code.
 ;;
@@ -1652,14 +1652,14 @@ user
 ;;
 ;; #### Function composition and partial functions
 ;;
-;; We seen earlier that we functions such as `first`,
+;; We have seen earlier that there are functions such as `first`,
 ;; `second`, `last` and `rest` to access respectively
-;; the first item of the sequence, the second one,
-;; the last one and the tail of the sequence.
-;; If it happens that we are working with lots 5 items
-;; sequences we have the tools to get all but the third
-;; and the forth item. If you are doing a lot of them
-;; you'll probably extract into two functions as follow:
+;; the first item of the sequence, the second item,
+;; the last item and the tail of the sequence.
+;; These functions can be combined to create other functions
+;; for accessing the third, fourth, fifth and other positional items.
+;; The following functions are an example of how to construct
+;; two such functions.
 
 (defn third
   [coll]
@@ -1677,7 +1677,7 @@ user
 
 ;; But there is another way.
 ;; If, like in this case, the output of a function
-;; gets passed directly into the next one
+;; can be passed directly into the input of the next one
 ;; as a simple pipeline of functions
 ;; then you can just use the `comp` function.
 ;;
@@ -1727,7 +1727,7 @@ user
 (almost-twice-twice 10)
 ;;=> 37
 
-;; Another way we could have wrote the `doubler`
+;; Another way we could have written the `doubler`
 ;; function is by using the partial application
 ;; of the function `*`. In Clojure this
 ;; is achieved via the function `partial`.
@@ -1741,18 +1741,18 @@ user
 ;;=> 10
 
 ;; what happens here is that the `partial`
-;; function return a function which
+;; function returns a function which
 ;; calls `*` with the parameters of the partial
-;; and the parameter of the final call all in one call.
+;; and the parameter of the final call, all in one call.
 ;;
 ;; Another nice example is using the function `format`
 ;; which takes a format-string and a bunch of arguments
 ;; and formats the string accordingly. This is very similar
 ;; to the C `printf` function however Clojure uses the
 ;; Java `String.format` implementation.
-;; So we can use this to produce a string which contains
-;; a zero-padded formatted version of the given number.
-;;
+;; So we can use this to create a function that produces a
+;; string which contains a zero-padded formatted version of
+;; the given number.
 
 (def pad0 (partial format "%013d"))
 
@@ -2325,7 +2325,7 @@ v2
 ;; takes a *predicate function* and a collection
 ;; and returns a lazy-sequence of the items in the
 ;; collection for which the application of the
-;; function returns a "thruthy" value.  Predicate
+;; function returns a "truthy" value.  Predicate
 ;; functions are functions which takes one
 ;; parameter and return a logical true or false.
 ;;
@@ -2342,7 +2342,7 @@ v2
 
 ;;
 ;; `identity` is a function which given a value
-;; it just return the value.
+;; will just return the value.
 ;; This is often used when a function transformation
 ;; is required as parameter, but no transformation is wanted.
 ;; another idiomatic use of it is to remove nil and false
@@ -2369,7 +2369,7 @@ v2
 ;; #### The function: `sort`
 ;;
 ;; `sort` as you would expect returns a sorted
-;; sequence of the element in the given collection.
+;; sequence of the elements in the given collection.
 ;;
 ;;      (sort coll)
 ;;      (sort comp coll)
@@ -2407,10 +2407,13 @@ v2
 ;; to perform grouping on your data.
 ;; `group-by` accepts a function and a collection
 ;; and it will apply the given function
-;; to all items in the collections and groups
-;; those which have the same result into
-;; the same key. It returns a map where
-;; the key is the group-value, and
+;; to all items in the collection and then
+;; group the items using the result of the function,
+;; i.e items that give the same result when the function is
+;; applied end up in the same group.
+;; Each group will be associated with it's common function result.
+;; It returns a map where
+;; the key is the group common function result, and
 ;; the value of the map is a list of items
 ;; which belong to that group.
 
@@ -2467,7 +2470,7 @@ v2
 ;;
 ;; The `step` parameters tells the function
 ;; how many item has to move forward after every chunk.
-;; if not give `step` is equal to `n`
+;; if not given `step` is equal to `n`
 
 (partition 3 1 (range 11))
 ;;=> ((0 1 2) (1 2 3) (2 3 4) (3 4 5) (4 5 6) (5 6 7) (6 7 8) (7 8 9) (8 9 10))
@@ -2481,7 +2484,7 @@ v2
 ;; `into` is used to create a new collection of a given
 ;; type with all items from another collection "into" it.
 ;; Items are conjoined using `conj`
-;; It is often used to change the type of a map,
+;; It is often used to change the type of a collection,
 ;; or to build a map out of key/value pairs.
 ;;
 ;;      (into dest source)
