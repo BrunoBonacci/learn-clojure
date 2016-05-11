@@ -1,4 +1,5 @@
-(ns learn-clojure.basics)
+(ns learn-clojure.basics
+  (:require [clojure.string :as str]))
 
 ;;
 ;; ## Clojure basics
@@ -2532,6 +2533,29 @@ v2
       (map (fn [e] [(first e) (inc (second e))])
            {:a 1, :b 2, :c 3}))
 ;;=> {:a 2, :b 3, :c 4}
+
+;;
+;; #### The function: `juxt`
+;;
+;; This function takes a set of functions,
+;; and returns a function which when
+;; called with a argument returns a vector
+;; with all the functions applied to the
+;; argument in the given order.
+;;
+;;      (juxt f1 f2 f3 ... fn)
+;;
+;; it returns a function which is equivalent to:
+;;
+;;      (fn [x] (vector (f1 x) (f2 x) (f3 x) ...))
+;;
+;;
+
+(def string-info
+  (juxt identity clojure.string/upper-case count frequencies))
+
+(string-info "Hello World")
+;;=> ["Hello World" "HELLO WORLD" 11 {\H 1, \e 1, \l 3, \o 2, \space 1, \W 1, \r 1, \d 1}]
 
 
 ;;
