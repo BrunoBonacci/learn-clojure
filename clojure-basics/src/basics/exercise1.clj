@@ -1,5 +1,6 @@
 (ns basics.exercise1
-  (:require [midje.sweet :refer [fact]]))
+  (:require [midje.sweet :refer [fact contains]]
+            [clojure.string :as str]))
 
 
 ;;
@@ -22,11 +23,12 @@
 ;; while "eats" and "seat" belong to another
 ;; sequence of anagrams.
 ;;
-;; Write a function which takes the Shakespeare
-;; opera as input which you downloaded as text
-;; "./data/shakespeare.txt" and return a sequence
-;; of the longest 10 sequences, of anagrams
-;; without duplicates.
+;; Write a function which takes the entire Shakespeare
+;; opera as input which you downloaded as text in
+;; "./data/shakespeare.txt" and returns a sequence
+;; of the longest 10 sequences of anagrams.
+;; Each sequence should not contains duplicates
+;; and should be sorted in alphabetic order.
 ;;
 ;; Advice: While solving this problem think about
 ;; data transformations, rather than state
@@ -58,8 +60,9 @@
       (let [text "My Team's mate eats a lot of meat,
                   and he never leaves his seat."]
 
-        (top-anagrams text)) => [["meat" "mate" "team"]
-                                 ["eats" "seat"]])
+        (top-anagrams text)) => [["mate" "meat" "team"]
+                                 ["eats" "seat"]]
+      )
 
 
 
