@@ -658,7 +658,7 @@ java.lang.Long/MAX_VALUE
 ;; structural sharing.  To understand more about
 ;; this you can read the following blog post:
 ;; [Understanding Clojure's Persistent](http://hypirion.com/musings/understanding-persistent-vector-pt-1)
-
+;;
 ;;
 ;; #### Maps
 ;;
