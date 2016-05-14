@@ -651,6 +651,15 @@ java.lang.Long/MAX_VALUE
 ;;=> :z
 
 ;;
+;; One important thing to note is that Clojure's
+;; data-structures are persistent which has
+;; anything to do with the durability (like: disk
+;; persistence). Persistent data structure do have
+;; structural sharing.  To understand more about
+;; this you can read the following blog post:
+;; [Understanding Clojure's Persistent](http://hypirion.com/musings/understanding-persistent-vector-pt-1)
+
+;;
 ;; #### Maps
 ;;
 ;; Maps are associative data structures (often
