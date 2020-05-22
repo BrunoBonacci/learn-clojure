@@ -55,7 +55,7 @@
 ;;
 ;;
 
-(fact "Anagrams are extract sorted by the longest chain"
+(fact "Anagrams are extracted sorted by the longest chain"
 
       (let [text "My Team's mate eats a lot of meat,
                   and he never leaves his seat."]
