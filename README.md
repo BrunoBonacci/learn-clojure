@@ -40,14 +40,15 @@ please follow the instructions at the [following page](https://github.com/Clojur
 Alternative Clojure IDEs
 
   * Relatively simple ones
-    * LightTable (http://lighttable.com/)
-    * NightCode  (https://sekao.net/nightcode/)
-    * Cursive    (https://cursive-ide.com/)
+    * LightTable                                     (http://lighttable.com/)
+    * NightCode                                      (https://sekao.net/nightcode/)
+    * Cursive                                        (https://cursive-ide.com/)
+    * VSCode <sup><sub>(Calva extension)</sup></sub> (https://calva.io/)
   * More complex ones
-    * Emacs + Cider (https://github.com/clojure-emacs/cider)
-    * Preludex (Emacs + Cider) (https://github.com/BrunoBonacci/preludex)
-    * Sapcemacs + Cider (Better vim) (http://spacemacs.org/)
-    * Vim + Fireplace (https://github.com/ctford/vim-fireplace-easy)
+    * Emacs + Cider                                        (https://github.com/clojure-emacs/cider)
+    * Preludex <sup><sub>(Emacs + Cider)</sup></sub>       (https://github.com/BrunoBonacci/preludex)
+    * Spacemacs + Cider <sup><sub>(Better vim)</sup></sub> (http://spacemacs.org/)
+    * Vim + Fireplace                                      (https://github.com/ctford/vim-fireplace-easy)
 
 If you have already your environment ready to go, then choose your learning path below.
 
