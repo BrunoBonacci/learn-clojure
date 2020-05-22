@@ -1572,9 +1572,6 @@ v2
 ;; can write a macro which turn my expression into a Go-like
 ;; expression which never throws exceptions?
 
-;;
-
-
 
 
 ;;
